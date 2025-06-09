@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Apostilas Gramaticais{% endblock %}
+{% block content %}
+<div class="apostila-title mb-4 mt-3">
+    <i class="fa-solid fa-book"></i> Apostila Gramatical Completa
+</div>
+<div class="apostila-container">
+    <div class="accordion" id="accordion-niveis">
+        {% for nivel in ['A1','A2','B1','B2','C1','C2'] %}
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="{{ nivel }}-head">
+                <button class="accordion-button nivel-{{ nivel|lower }}" type="button" data-bs-toggle="collapse" data-bs-target="#{{ nivel }}" aria-expanded="{{ 'true' if loop.first else 'false' }}" aria-controls="{{ nivel }}">
+                    <i class="fa-solid fa-leaf me-2"></i> Nível {{ nivel }}
+                </button>
+            </h2>
+            <div id="{{ nivel }}" class="accordion-collapse collapse {% if loop.first %}show{% endif %}" aria-labelledby="{{ nivel }}-head" data-bs-parent="#accordion-niveis">
+                <div class="accordion-body">
+                    {% include 'apostila_' + nivel + '.html' %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

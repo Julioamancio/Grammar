@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% block title %}Exercícios{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>
+/* ... todo seu CSS permanece igual ... */
+.ex-main-content { width: 100vw; min-height: 100vh; display: flex; flex-direction: column; align-items: center; background: #f8fafc;}
+.ex-medalha-quadro { width: 100%; max-width: 540px; margin: 32px auto 22px auto; background: #fffbe9; border-radius: 18px; box-shadow: 0 2px 8px #ffb30022; padding: 22px 32px 16px 32px; display: flex; align-items: center; justify-content: center; gap: 38px; border: 1.5px solid #ffe082; font-size: 1.18em;}
+.ex-medalha-box { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; min-width: 100px;}
+.ex-medalha-num { font-weight: bold; font-size: 1.7em; color: #222; margin-bottom: 2px; font-family: 'Inter', 'Segoe UI', Arial, sans-serif; letter-spacing: .5px;}
+.ex-medalha-ouro   { color: #ffb300; text-shadow: 0 1px 6px #ffecb3; }
+.ex-medalha-prata  { color: #90caf9; text-shadow: 0 1px 6px #e3f2fd; }
+.ex-medalha-bronze { color: #bcaaa4; text-shadow: 0 1px 6px #efebe9; }
+.ex-medalha-label { font-size: 1em; font-weight: 600; margin-top: 1px; color: #7b7b7b; letter-spacing: .5px; display: flex; align-items: center; gap: 4px;}
+@media (max-width: 700px) { .ex-medalha-quadro { flex-direction: column; gap: 8px; padding: 12px 10px;} .ex-medalha-box { min-width: 0; } }
+#ex-menu-area { width: 100%; display: flex; flex-direction: column; align-items: center; margin-top: 0; transition: opacity .3s;}
+.ex-menu-center-area { width: 100%; display: flex; justify-content: center; align-items: flex-start; gap: 38px; margin-top: 10px;}
+@media (max-width: 1150px) { .ex-menu-center-area { flex-direction: column; align-items: center; gap: 18px; } }
+.ex-desc-box { background: #fff; border-radius: 20px; box-shadow: 0 2px 18px #1976d220; padding: 32px 36px 28px 36px; font-size: 1.16em; color: #1866b8; display: flex; flex-direction: column; align-items: flex-start; text-align: left; font-family: 'Inter', 'Segoe UI', Arial, sans-serif; border: 1.5px solid #e3f3fd; max-width: 440px; min-width: 340px; width: 100%; min-height: 340px; margin: 0;}
+.ex-desc-title { font-weight: bold; font-size: 1.19em; color: #1976d2; margin-bottom: 8px; letter-spacing: 0.01em; display: flex; align-items: center; gap: 8px;}
+.ex-desc-box i { font-size: 2em; color: #1976d2; vertical-align: middle;}
+.ex-desc-box ul { margin: 16px 0 0 18px; padding-left: 0; font-size: 1em;}
+.ex-desc-box ul li { margin-bottom: 7px; line-height: 1.65; color: #155385; font-size: 1em; position: relative; padding-left: 22px;}
+.ex-desc-box ul li::before { content: "\f058"; font-family: "Font Awesome 6 Free"; font-weight: 900; color: #1976d2; position: absolute; left: 0; top: 2px; font-size: 1em;}
+.ex-desc-obs { color: #1976d2; font-weight: 600; margin-top: 14px; font-size: 1.05em;}
+@media (max-width: 700px) { .ex-desc-box { padding: 17px 7px 12px 13px; font-size: 1em; max-width: 99vw;} .ex-desc-title { font-size: 1em; } }
+.ex-dropdown-menu { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 18px; background: transparent; padding-top: 16px;}
+.ex-dropdown-label { font-weight: bold; margin-bottom: 8px; color: #1976d2; font-size: 1.08em; display: flex; align-items: center; gap: 8px; justify-content: center;}
+.ex-select { padding: 9px 18px; border-radius: 7px; border: 1.5px solid #1976d2; font-size: 1.11em; background: #f8fafc; color: #1976d2; font-weight: 600; margin-bottom: 8px; min-width: 240px; outline: none;}
+.ex-open-btn { background: #1976d2; color: #fff; border: none; border-radius: 8px; padding: 10px 32px; font-size: 1.13em; cursor: pointer; font-weight: 600; margin-bottom: 8px; margin-top: 4px; transition: background 0.18s, box-shadow 0.18s; box-shadow: 0 2px 8px #1976d220; display: flex; align-items: center; gap: 10px;}
+.ex-open-btn:hover, .ex-open-btn:focus { background: #145ca3; }
+#ex-exercise-area { display: none; width: 100vw; min-height: 100vh; justify-content: center; align-items: flex-start; position: relative; z-index: 10; background: transparent;}
+#ex-exercise-area.active { display: flex;}
+.ex-frame-big-wrap { width: 100vw; display: flex; flex-direction: column; align-items: center;}
+.ex-back-btn-row { width: 100%; max-width: 900px; margin: 30px auto 10px auto; display: flex; justify-content: flex-start;}
+.ex-back-btn { background: #f7fafd; border: 1.5px solid #1976d2; color: #1976d2; border-radius: 7px; padding: 7px 23px; font-size: 1.13em; font-weight: 500; cursor: pointer; box-shadow: 0 2px 8px #1976d210; z-index: 20; transition: background 0.23s; display: flex; align-items: center; gap: 7px;}
+.ex-back-btn:hover { background: #e3f3fd;}
+.ex-frame-big { width: 100%; max-width: 900px; min-height: 730px; background: #fff; border-radius: 22px; box-shadow: 0 2px 24px #0001; overflow: hidden; margin: 0 auto 30px auto; border: 1.5px solid #e3e3e3; display: flex; flex-direction: column; position: relative; padding: 0; transition: all .3s;}
+.ex-frame-big iframe { width: 100%; height: 75vh; min-height: 620px; border: none; background: #fff; border-radius: 22px; padding: 0; display: block; flex: 1 1 auto;}
+@media (max-width: 1100px) { .ex-frame-big, .ex-dropdown-menu, .ex-back-btn-row, .ex-desc-box { max-width: 99vw; } }
+@media (max-width: 900px) { .ex-desc-box { padding: 11px 6px 10px 9px; font-size: .97em; } .ex-dropdown-label { font-size: .99em; } .ex-frame-big, .ex-frame-big iframe { border-radius: 10px; min-width: 0; } .ex-back-btn { font-size: .97em; padding: 6px 15px;} }
+body, html { overflow-x: hidden;}
+</style>
+
+<div class="ex-main-content">
+    <!-- QUADRO DE MEDALHAS -->
+    <div class="ex-medalha-quadro" id="medalhas-quadro">
+        <div class="ex-medalha-box">
+            <span class="ex-medalha-num ex-medalha-ouro" id="medalha-ouro-num">0</span>
+            <span class="ex-medalha-label ex-medalha-ouro">
+                <i class="fa-solid fa-medal"></i>
+                Ouro
+            </span>
+        </div>
+        <div class="ex-medalha-box">
+            <span class="ex-medalha-num ex-medalha-prata" id="medalha-prata-num">0</span>
+            <span class="ex-medalha-label ex-medalha-prata">
+                <i class="fa-solid fa-medal"></i>
+                Prata
+            </span>
+        </div>
+        <div class="ex-medalha-box">
+            <span class="ex-medalha-num ex-medalha-bronze" id="medalha-bronze-num">0</span>
+            <span class="ex-medalha-label ex-medalha-bronze">
+                <i class="fa-solid fa-medal"></i>
+                Bronze
+            </span>
+        </div>
+    </div>
+
+    <!-- MENU E DESCRIÇÃO CENTRALIZADOS EM GRID FLEX -->
+    <div id="ex-menu-area">
+        <div class="ex-menu-center-area">
+            <div class="ex-desc-box">
+                <div class="ex-desc-title"><i class="fa-solid fa-dumbbell"></i> Bem-vindo à área de Exercícios Interativos!</div>
+                <div>
+                    Aqui você pode praticar o conteúdo de cada nível do seu curso de Inglês.
+                    <ul>
+                        <li>Escolha o nível desejado no menu abaixo e clique em <b>Abrir Exercício</b>.</li>
+                        <li>Cada exercício oferece feedback imediato e explicações.</li>
+                        <li>Procure revisar os tópicos antes de tentar os exercícios de cada nível.</li>
+                    </ul>
+                    <div class="ex-desc-obs">
+                        <i class="fa-solid fa-thumbs-up"></i> Bons estudos!
+                    </div>
+                </div>
+            </div>
+            <div class="ex-dropdown-menu">
+                <label class="ex-dropdown-label" for="nivel-ex">
+                    <i class="fa-solid fa-dumbbell"></i> Selecione o Nível:
+                </label>
+                <select class="ex-select" id="nivel-ex">
+                    <option value="A1">Nível A1 - Iniciante</option>
+                    <option value="A2">Nível A2 - Básico</option>
+                    <option value="B1">Nível B1 - Intermediário</option>
+                    <option value="B2">Nível B2 - Intermediário Superior</option>
+                    <option value="C1">Nível C1 - Avançado</option>
+                    <option value="C2">Nível C2 - Proficiência</option>
+                </select>
+                <button class="ex-open-btn" id="btn-abrir-ex">
+                    <i class="fa-solid fa-play"></i> Abrir Exercício
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXERCÍCIO CENTRALIZADO -->
+    <div id="ex-exercise-area">
+        <div class="ex-frame-big-wrap">
+            <div class="ex-back-btn-row">
+                <button class="ex-back-btn" id="btn-voltar-ex">
+                    <i class="fa-solid fa-arrow-left"></i> Voltar ao Menu
+                </button>
+            </div>
+            <div class="ex-frame-big">
+                <iframe id="iframe-ex" src="" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// --------------- PLACAR DE MEDALHAS SINCRONIZADO COM EXERCÍCIOS ---------------
+
+function atualizarQuadroMedalhasBackend() {
+    fetch('/minhas_medalhas')
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById('medalha-ouro-num').textContent = data.ouro || 0;
+            document.getElementById('medalha-prata-num').textContent = data.prata || 0;
+            document.getElementById('medalha-bronze-num').textContent = data.bronze || 0;
+            // Salva como cache
+            localStorage.setItem('ex_medalhas', JSON.stringify({
+                ouro: data.ouro || 0,
+                prata: data.prata || 0,
+                bronze: data.bronze || 0
+            }));
+        });
+}
+
+document.addEventListener('DOMContentLoaded', atualizarQuadroMedalhasBackend);
+
+const exMenuArea = document.getElementById("ex-menu-area");
+const exExerciseArea = document.getElementById("ex-exercise-area");
+const btnAbrir = document.getElementById("btn-abrir-ex");
+const btnVoltar = document.getElementById("btn-voltar-ex");
+const iframeEx = document.getElementById("iframe-ex");
+
+btnAbrir.addEventListener("click", function() {
+    const nivel = document.getElementById("nivel-ex").value;
+    let route = "/exerciciosA1";
+    if (nivel === "A2") route = "/exerciciosA2";
+    if (nivel === "B1") route = "/exerciciosB1";
+    if (nivel === "B2") route = "/exerciciosB2";
+    if (nivel === "C1") route = "/exerciciosC1";
+    if (nivel === "C2") route = "/exerciciosC2";
+    exMenuArea.style.display = "none";
+    exExerciseArea.classList.add("active");
+    iframeEx.src = route;
+    window.scrollTo(0,0);
+    document.body.style.overflowX = "hidden";
+});
+
+btnVoltar.addEventListener("click", function() {
+    exMenuArea.style.display = "flex";
+    exExerciseArea.classList.remove("active");
+    iframeEx.src = "";
+    window.scrollTo(0,0);
+    document.body.style.overflowX = "";
+    setTimeout(atualizarQuadroMedalhasBackend, 200);
+});
+
+// RECEBE mensagem do exercício (iframe) quando ganhar medalha
+window.addEventListener("message", function(event) {
+    if (event.data && event.data.medalhaGanha) {
+        atualizarQuadroMedalhasBackend();
+    }
+});
+</script>
+{% endblock %}

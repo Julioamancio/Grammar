@@ -1,0 +1,23 @@
+<div class="sidebar">
+    <div class="logo">
+        <i class="fa-solid fa-book"></i>
+        <span style="font-size:1.23rem;font-weight:900;margin-left:2px;line-height:1.1;">
+            Gramática<br>Plataforma
+        </span>
+    </div>
+    <a class="menu-btn{% if request.endpoint == 'dashboard' %} active{% endif %}" href="{{ url_for('dashboard') }}">
+        <i class="fa-solid fa-house-chimney"></i> Home
+    </a>
+    <a class="menu-btn{% if request.endpoint == 'apostilas' %} active{% endif %}" href="{{ url_for('apostilas') }}">
+        <i class="fa-solid fa-book-open"></i> Apostilas
+    </a>
+    <!-- NOVO BOTÃO EXERCÍCIOS -->
+    <a class="menu-btn{% if request.endpoint == 'exercicios' %} active{% endif %}" href="{{ url_for('exercicios') }}">
+        <i class="fa-solid fa-dumbbell"></i> Grammar Exercises
+    </a>
+    <form method="GET" action="{{ url_for('logout') }}" class="sidebar-logout">
+        <button class="menu-btn" type="submit">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Sair
+        </button>
+    </form>
+</div>

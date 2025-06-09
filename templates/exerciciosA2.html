@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Exercícios Interativos – Nível A2</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <style>
+    .a2-ex-container {
+      background: #fff;
+      border-radius: 18px;
+      max-width: 940px;
+      margin: 26px auto 30px auto;
+      box-shadow: 0 4px 32px #1976d215;
+      padding: 32px 34px 25px 34px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .a2-title {
+      font-size: 1.4em;
+      color: #1976d2;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      margin-top: 0;
+      justify-content: flex-start;
+    }
+    .a2-medals-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px 18px;
+      margin-bottom: 20px;
+      align-items: center;
+    }
+    .a2-medal-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 1em;
+      background: #f5f5f5;
+      border-radius: 7px;
+      padding: 5px 13px;
+      min-width: 90px;
+      border: 1px solid #e3e3e3;
+      justify-content: center;
+    }
+    .a2-medal {
+      font-size: 1.3em;
+      padding-right: 2px;
+      vertical-align: middle;
+    }
+    .a2-medal-gold { color: #ffb300; }
+    .a2-medal-silver { color: #90caf9; }
+    .a2-medal-bronze { color: #bcaaa4; }
+    .a2-topic-title {
+      font-size: 1.13em;
+      color: #1976d2;
+      font-weight: bold;
+      margin-bottom: 7px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .a2-question {
+      font-size: 1.09em;
+      margin-bottom: 13px;
+      color: #1a237e;
+    }
+    .a2-options label {
+      display: block;
+      margin-bottom: 9px;
+      background: #e3f3fd;
+      border-radius: 6px;
+      padding: 9px 13px;
+      cursor: pointer;
+      transition: background 0.18s;
+      font-size: 1.09em;
+      border: 1px solid #dde6fa;
+    }
+    .a2-options input[type="radio"] {
+      margin-right: 8px;
+    }
+    .a2-options label.correct {
+      background: #dcedc8;
+      font-weight: 600;
+    }
+    .a2-options label.incorrect {
+      background: #ffcdd2;
+      font-weight: 600;
+    }
+    .a2-options input[disabled] + span,
+    .a2-options input[disabled] {
+      cursor: not-allowed;
+    }
+    .a2-feedback {
+      margin-top: 7px;
+      font-weight: bold;
+      min-height: 18px;
+    }
+    .a2-explanation {
+      margin-top: 5px;
+      font-size: 0.98em;
+      color: #1a237e;
+      background: #e7f7e7;
+      border-radius: 5px;
+      padding: 6px 12px;
+      margin-bottom: 5px;
+      display: inline-block;
+    }
+    .a2-next-btn {
+      background: #1976d2;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 22px;
+      font-size: 1.06em;
+      cursor: pointer;
+      margin-top: 16px;
+      transition: background 0.18s;
+      display: none;
+    }
+    .a2-next-btn.active {
+      display: inline-block;
+    }
+    .a2-progress {
+      margin-top: 15px;
+      color: #888;
+      font-size: 0.98em;
+    }
+
+    @media (max-width: 1100px) {
+      .a2-ex-container { max-width: 99vw; padding: 3vw 1vw; }
+    }
+    @media (max-width: 700px) {
+      .a2-title { font-size: 1.1em; margin-top: 8px; }
+      .a2-medals-row { flex-direction: column; gap: 7px; }
+      .a2-medal-item { min-width: 0; width: 100%; }
+      .a2-ex-container { padding: 2vw 2vw; }
+    }
+
+    /* Realce do resultado final */
+    .a2-end-message {
+      text-align: center;
+      padding: 25px 0;
+      max-width: 540px;
+      margin: 0 auto;
+      background: #f5f5f5;
+      border-radius: 10px;
+      box-shadow: 0 3px 12px #1976d230;
+      margin-top: 24px;
+    }
+  </style>
+</head>
+<body>
+<div class="a2-ex-container">
+  <div class="a2-title">
+    <i class="fa-solid fa-arrow-up-from-ground-water"></i>
+    Exercícios Interativos – Nível A2
+  </div>
+  <div id="a2-medals"></div>
+  <div id="a2-root"></div>
+</div>
+
+<script>
+/**
+ * Embaralha um array (Fisher–Yates shuffle).
+ */
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+const a2Topics = [
+  {
+    icon: "fa-clock-rotate-left", color: "#29b6f6", title: "Simple past (regular/irregular)", questions: [
+      { q: "I ___ to the cinema yesterday (go).", a: ["go", "went", "gone"], correct: 1 },
+      { q: "They ___ a big party last week (plan).", a: ["planned", "planed", "planning"], correct: 0 }
+    ]
+  },
+  {
+    icon: "fa-building-columns", color: "#1976d2", title: "Past of verb to be (was / were)", questions: [
+      { q: "He ___ very tired after the trip.", a: ["was", "were", "is"], correct: 0 },
+      { q: "They ___ excited about the concert.", a: ["are", "was", "were"], correct: 2 }
+    ]
+  },
+  {
+    icon: "fa-cubes", color: "#4caf50", title: "Countable and uncountable nouns", questions: [
+      { q: "How much ___ do we need for the cake?", a: ["flour", "flours", "flouring"], correct: 0 },
+      { q: "How many ___ do you want?", a: ["water", "bottles", "traffic"], correct: 1 }
+    ]
+  },
+  {
+    icon: "fa-circle-question", color: "#ffb300", title: "Some / any / much / many / a lot of", questions: [
+      { q: "Do you have ___ questions?", a: ["some", "any", "a lot"], correct: 1 },
+      { q: "There are ___ apples in the fridge.", a: ["much", "many", "any"], correct: 1 }
+    ]
+  },
+  {
+    icon: "fa-calendar-check", color: "#ab47bc", title: "Adverbs of frequency", questions: [
+      { q: "I ___ go to the gym (100% of the time).", a: ["never", "always", "often"], correct: 1 },
+      { q: "He ___ drinks coffee in the morning (about 70% of the time).", a: ["sometimes", "rarely", "often"], correct: 2 }
+    ]
+  },
+  {
+    icon: "fa-arrows-up-down", color: "#26a69a", title: "Comparatives and superlatives", questions: [
+      { q: "This building is ___ than that one.", a: ["taller", "tallest", "most tall"], correct: 0 },
+      { q: "It was the ___ movie I've ever seen.", a: ["badder", "worst", "worse"], correct: 1 }
+    ]
+  },
+  {
+    icon: "fa-people-carry-box", color: "#ff7043", title: "Object pronouns (me, him, us...)", questions: [
+      { q: "Could you help ___ with this box?", a: ["I", "me", "my"], correct: 1 },
+      { q: "I saw Mary and gave a book to ___", a: ["she", "her", "hers"], correct: 1 }
+    ]
+  },
+  {
+    icon: "fa-spinner", color: "#3949ab", title: "Present continuous (now)", questions: [
+      { q: "They ___ dinner at the moment.", a: ["have", "are having", "had"], correct: 1 },
+      { q: "Maria ___ on the phone right now.", a: ["talks", "talked", "is talking"], correct: 2 }
+    ]
+  },
+  {
+    icon: "fa-hand-holding-heart", color: "#8d6e63", title: "Future with going to", questions: [
+      { q: "I ___ visit my grandparents next week.", a: ["am going to", "will to", "am go"], correct: 0 },
+      { q: "They ___ travel abroad this summer.", a: ["are going to", "will going", "is going"], correct: 0 }
+    ]
+  },
+  {
+    icon: "fa-key", color: "#00897b", title: "Modal verbs (can/could/should)", questions: [
+      { q: "You ___ rest if you are tired.", a: ["could", "should", "can"], correct: 1 },
+      { q: "___ you open the window, please?", a: ["Could", "Should", "Must"], correct: 0 }
+    ]
+  },
+  {
+    icon: "fa-calendar-days", color: "#afb42b", title: "Prepositions of time (in, on, at)", questions: [
+      { q: "My birthday is ___ January.", a: ["on", "at", "in"], correct: 2 },
+      { q: "We have a meeting ___ 3 pm.", a: ["at", "on", "in"], correct: 0 }
+    ]
+  },
+  {
+    icon: "fa-book-question", color: "#f4511e", title: "Wh- questions in past/present", questions: [
+      { q: "___ did you go yesterday? I went to the park.", a: ["What", "Where", "Who"], correct: 1 },
+      { q: "___ is your favorite color? It's blue.", a: ["When", "Which", "What"], correct: 2 }
+    ]
+  },
+  {
+    icon: "fa-greater-than-equal", color: "#00838f", title: "Too / enough", questions: [
+      { q: "It's ___ cold to go out without a jacket.", a: ["enough", "too", "very"], correct: 1 },
+      { q: "I don't have ___ time to finish this task.", a: ["enough", "too", "very"], correct: 0 }
+    ]
+  },
+  {
+    icon: "fa-face-smile", color: "#00c853", title: "Like + verb-ing", questions: [
+      { q: "I ___ going to the cinema on weekends.", a: ["like", "liked", "like to"], correct: 0 },
+      { q: "She doesn't ___ watching horror movies.", a: ["like", "likes", "liking"], correct: 0 }
+    ]
+  },
+  {
+    icon: "fa-people-arrows-left-right", color: "#8e24aa", title: "Basic phrasal verbs (get up, turn on...)", questions: [
+      { q: "I ___ at 7 a.m. every day.", a: ["get up", "turn on", "pick up"], correct: 0 },
+      { q: "Please ___ the TV, I want to watch something.", a: ["pick up", "turn off", "turn on"], correct: 2 }
+    ]
+  }
+];
+
+const explicacoes2 = [
+  // Simple past
+  [
+    [
+      "went: Correto. Passado irregular de 'go'.",
+      "planned: Correto. Passado regular de 'plan' (plan + ned)."
+    ]
+  ],
+  // Past of verb to be
+  [
+    [
+      "was: Correto. 'He was tired.' É o passado singular de 'be'.",
+      "were: Correto. É o passado plural de 'be'. Para 'they', usamos 'were'."
+    ]
+  ],
+  // Countable/uncountable
+  [
+    [
+      "flour: Correto. 'Flour' é incontável.",
+      "bottles: Correto. 'Bottles' são contáveis."
+    ]
+  ],
+  // Some/any/much/many/a lot of
+  [
+    [
+      "any: Correto para perguntas ou negativas.",
+      "many: Correto para substantivos contáveis (apples)."
+    ]
+  ],
+  // Adverbs of frequency
+  [
+    [
+      "always: Correto (100%).",
+      "often: Correto (~70%)."
+    ]
+  ],
+  // Comparatives and superlatives
+  [
+    [
+      "taller: Correto. Comparativo (adj + er).",
+      "worst: Correto. Superlativo irregular de 'bad'."
+    ]
+  ],
+  // Object pronouns
+  [
+    [
+      "me: Correto. Objeto para 'I'.",
+      "her: Correto. Objeto para 'she'."
+    ]
+  ],
+  // Present continuous
+  [
+    [
+      "are having: Correto. Ação acontecendo agora.",
+      "is talking: Correto. Ação no momento."
+    ]
+  ],
+  // Future with going to
+  [
+    [
+      "am going to: Correto. Futuro planejado.",
+      "are going to: Correto. Para 'they'."
+    ]
+  ],
+  // Modal verbs
+  [
+    [
+      "should: Correto. Conselho ou recomendação.",
+      "Could: Correto. Pedido educado."
+    ]
+  ],
+  // Prepositions of time
+  [
+    [
+      "in: Correto. Meses usam 'in'.",
+      "at: Correto. Horas usam 'at'."
+    ]
+  ],
+  // Wh- questions in past/present
+  [
+    [
+      "Where: Correto. Perguntar 'onde' no passado.",
+      "What: Correto. Perguntar 'qual' no presente."
+    ]
+  ],
+  // Too / enough
+  [
+    [
+      "too: Correto. Indica 'excesso'.",
+      "enough: Correto. Significa 'suficiente'."
+    ]
+  ],
+  // Like + verb-ing
+  [
+    [
+      "like: Correto. Estrutura 'like + verbo-ing'.",
+      "like: Correto. Forma negativa também segue 'like + ing'."
+    ]
+  ],
+  // Basic phrasal verbs
+  [
+    [
+      "get up: Correto. 'Levantarse'.",
+      "turn on: Correto. 'Ligar' algo."
+    ]
+  ]
+];
+
+/**
+ * Evento: manipular tentativas e a lógica do quiz
+ */
+let currentTopic = 0, currentQ = 0;
+let questoesTentativas = [];
+let totalQuestoes = 0;
+
+function embaralharTudo() {
+  shuffle(a2Topics);
+  a2Topics.forEach(topic => {
+    shuffle(topic.questions);
+    topic.questions.forEach(q => {
+      const correctAnswer = q.a[q.correct];
+      shuffle(q.a);
+      q.correct = q.a.indexOf(correctAnswer);
+    });
+  });
+}
+
+function inicializaQuestoes() {
+  embaralharTudo();
+  questoesTentativas = [];
+  a2Topics.forEach(topic => {
+    topic.questions.forEach(() => {
+      questoesTentativas.push({ tentativas: 0, medalha: null, answered: false });
+    });
+  });
+  totalQuestoes = questoesTentativas.length;
+}
+
+function getQuestaoIdx(topicIdx, qIdx) {
+  let idx = 0;
+  for (let t = 0; t < topicIdx; t++) {
+    idx += a2Topics[t].questions.length;
+  }
+  return idx + qIdx;
+}
+
+function renderA2Exercise() {
+  renderMedalsStatus();
+  const t = a2Topics[currentTopic];
+  const q = t.questions[currentQ];
+  const qidx = getQuestaoIdx(currentTopic, currentQ);
+  const medalObj = questoesTentativas[qidx];
+
+  let html = `
+    <div>
+      <div class="a2-topic-title">
+        <i class="fa-solid ${t.icon}" style="color:${t.color}"></i> ${t.title}
+      </div>
+      <div class="a2-question">${q.q}</div>
+      <form class="a2-options" id="a2-options">
+        ${q.a.map((opt, i) => `
+          <label>
+            <input type="radio" name="a2" value="${i}" ${medalObj.answered ? "disabled" : ""}> ${opt}
+          </label>
+        `).join('')}
+      </form>
+      <div class="a2-feedback" id="a2-feedback"></div>
+      <button class="a2-next-btn" id="a2-next-btn" style="display:none;">Próxima</button>
+      <div class="a2-progress">
+        Progresso: <b>${getA2Progress()}</b>
+      </div>
+    </div>
+  `;
+  document.getElementById('a2-root').innerHTML = html;
+
+  if (medalObj.answered) {
+    showGabarito(medalObj, t, q, qidx);
+  }
+
+  document.getElementById('a2-options').onclick = function(e) {
+    if (e.target.name === "a2" && !medalObj.answered) {
+      checkA2(e.target.value);
+    }
+  };
+  document.getElementById('a2-next-btn').onclick = nextA2;
+}
+
+function checkA2(val) {
+  val = +val;
+  const t = a2Topics[currentTopic];
+  const q = t.questions[currentQ];
+  const qidx = getQuestaoIdx(currentTopic, currentQ);
+  const medalObj = questoesTentativas[qidx];
+  medalObj.tentativas++;
+
+  const radios = document.querySelectorAll('.a2-options input[type="radio"]');
+  if (val === q.correct) {
+    medalObj.answered = true;
+    medalObj.medalha = medalByAttempts(medalObj.tentativas);
+    showGabarito(medalObj, t, q, qidx);
+    renderMedalsStatus();
+  } else {
+    radios.forEach(inp => inp.checked = false);
+    const labels = document.querySelectorAll('.a2-options label');
+    labels.forEach((label, i) => {
+      label.classList.remove('correct', 'incorrect');
+      if (i === val) label.classList.add('incorrect');
+    });
+    document.getElementById('a2-feedback').innerHTML =
+      `<span style="color:#e53935;"><i class="fa-solid fa-circle-xmark"></i> Errou!</span>
+       <div class="a2-explanation">${getExplicacao2(currentTopic, currentQ)}</div>`;
+  }
+}
+
+function showGabarito(medalObj, t, q, qidx) {
+  const labels = document.querySelectorAll('.a2-options label');
+  labels.forEach((label, i) => {
+    label.classList.remove('correct', 'incorrect');
+    if (i === q.correct) label.classList.add('correct');
+  });
+  document.querySelectorAll('.a2-options input[type="radio"]').forEach(inp => inp.disabled = true);
+  const fb = document.getElementById('a2-feedback');
+  let medalTxt = '';
+  if (medalObj.medalha !== null) {
+    if (medalObj.medalha === 0)
+      medalTxt = `🥇 <b>Ouro conquistada!</b>`;
+    else if (medalObj.medalha === 1)
+      medalTxt = `🥈 <b>Prata conquistada!</b>`;
+    else
+      medalTxt = `🥉 <b>Bronze conquistada!</b>`;
+  }
+  fb.innerHTML = `<span style="color:#43a047;"><i class="fa-solid fa-circle-check"></i> Correto!</span> ${medalTxt}`;
+  document.getElementById('a2-next-btn').style.display = "inline-block";
+}
+
+function nextA2() {
+  const t = a2Topics[currentTopic];
+  if (currentQ < t.questions.length - 1) {
+    currentQ++;
+  } else if (currentTopic < a2Topics.length - 1) {
+    currentTopic++;
+    currentQ = 0;
+  } else {
+    showA2Result();
+    return;
+  }
+  renderA2Exercise();
+}
+
+function getA2Progress() {
+  let done = questoesTentativas.filter(q => q.answered).length;
+  return `${done}/${totalQuestoes}`;
+}
+
+function showA2Result() {
+  let ouro = questoesTentativas.filter(q => q.answered && q.medalha === 0).length;
+  let percent = Math.round((ouro / totalQuestoes) * 100);
+  let color = percent >= 60 ? "#43a047" : "#e53935";
+  let msg = percent >= 60
+    ? `<i class="fa-solid fa-crown"></i> Parabéns! Você concluiu o nível A2 com <b>${percent}%</b> de OURO (acertos de primeira tentativa).<br><br>
+       O próximo nível está liberado, e você receberá um certificado no seu e-mail!`
+    : `<i class="fa-solid fa-circle-xmark"></i> Você concluiu com <b>${percent}%</b> de OURO (acertos de primeira tentativa).<br><br>
+       Você precisa repetir o nível para liberar o próximo.`;
+
+  document.getElementById('a2-root').innerHTML = `
+    <div class="a2-end-message" style="color:${color};">
+      <div style="font-size:1.18em;">
+        ${msg}
+      </div>
+    </div>
+  `;
+  renderMedalsStatus(true);
+
+  // Exemplo de envio de resultado
+  if (percent >= 60 && window.currentUserNivel !== undefined) {
+    fetch("/enviar_resultado", {
+      method: "POST",
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({nivel: "A2", resultado: percent})
+    });
+  }
+}
+
+function renderMedalsStatus(showAll = false) {
+  let html = `<div class="a2-medals-row">`;
+  let idx = 0;
+  a2Topics.forEach((topic) => {
+    topic.questions.forEach(() => {
+      const m = questoesTentativas[idx];
+      let medalStr = "";
+      if (m.answered || showAll) {
+        if (m.medalha !== null) {
+          medalStr = medalIconHtml(m.medalha) + ` <span>${medalTypes[m.medalha].name}</span>`;
+        } else {
+          medalStr = `<span style="color:#aaa;">—</span>`;
+        }
+      }
+      html += `<div class="a2-medal-item">
+        <span style="font-weight:600;">${idx + 1}.</span> ${medalStr}
+      </div>`;
+      idx++;
+    });
+  });
+  html += `</div>`;
+  document.getElementById('a2-medals').innerHTML = html;
+}
+
+function getExplicacao2(topicIdx, qIdx) {
+  if (explicacoes2[topicIdx] && explicacoes2[topicIdx][qIdx]) {
+    // Tenta buscar pelo índice exato, mas se não existir array grande, retorna genérico
+    const arr = explicacoes2[topicIdx][qIdx];
+    if (arr) {
+      // Para erro, retornamos a primeira explicação do conjunto
+      // (já que estamos apenas dando uma dica)
+      return arr[0] || "Confira a explicação do tópico.";
+    }
+  }
+  return "Confira a explicação do tópico.";
+}
+
+const medalTypes = [
+  { name: "Ouro", icon: "fa-medal", class: "a2-medal-gold", emoji: "🥇" },
+  { name: "Prata", icon: "fa-medal", class: "a2-medal-silver", emoji: "🥈" },
+  { name: "Bronze", icon: "a2-medal-bronze", emoji: "🥉" }
+];
+
+const medalByAttempts = (n) => n === 1 ? 0 : n === 2 ? 1 : 2;
+
+function medalIconHtml(idx) {
+  if (idx === 0) return `<span class="a2-medal a2-medal-gold"><i class="fa-solid fa-medal"></i></span>`;
+  if (idx === 1) return `<span class="a2-medal a2-medal-silver"><i class="fa-solid fa-medal"></i></span>`;
+  return `<span class="a2-medal a2-medal-bronze"><i class="fa-solid fa-medal"></i></span>`;
+}
+
+// Inicializa e mostra
+inicializaQuestoes();
+renderA2Exercise();
+</script>
+</body>
+</html>

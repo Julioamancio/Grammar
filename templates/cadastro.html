@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Cadastro - Apostila Gramatical{% endblock %}
+{% block content %}
+<div class="container" style="max-width: 400px; margin-top: 80px;">
+    <div class="card">
+        <div class="card-header text-center bg-success text-white">
+            <i class="fa-solid fa-user-plus"></i> Cadastro
+        </div>
+        <div class="card-body">
+            <form method="POST">
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="nome" name="nome" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">E-mail</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="senha" class="form-label">Senha</label>
+                    <input type="password" class="form-control" id="senha" name="senha" required>
+                </div>
+                <button type="submit" class="btn btn-success w-100"><i class="fa-solid fa-user-plus"></i> Cadastrar</button>
+            </form>
+            <div class="mt-3 text-center">
+                <a href="{{ url_for('login') }}">Já tem conta? Entrar</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

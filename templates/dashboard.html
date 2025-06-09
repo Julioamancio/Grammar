@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Painel do Aluno - Apostila Gramatical{% endblock %}
+{% block content %}
+<div class="container" style="max-width: 600px; margin-top: 70px;">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-primary text-white text-center rounded-top-4 py-4">
+            <i class="fa-solid fa-graduation-cap fa-2x"></i>
+            <span class="fs-2 fw-bold ms-2">Bem-vindo(a), {{ current_user.nome }}!</span>
+        </div>
+        <div class="card-body text-center py-5">
+            <div class="mb-4">
+                <p class="fs-4 mb-2 fw-semibold text-secondary">
+                    🎉 Você está em um ambiente de estudos exclusivo!
+                </p>
+                <p class="fs-5 text-muted">
+                    Aqui você encontra apostilas gramaticais completas, separadas por níveis internacionais (A1 a C2), com explicações claras, exemplos, dicas e muito mais.
+                </p>
+                <p class="fs-6 text-primary">
+                    Explore, avance e evolua no seu domínio do idioma de forma organizada, divertida e eficiente!
+                </p>
+            </div>
+            <div class="d-flex flex-column flex-md-row justify-content-center gap-3 mt-4">
+                <a href="{{ url_for('apostilas') }}" class="btn btn-lg btn-success fw-bold px-4 py-3 shadow">
+                    <i class="fa-solid fa-book-open-reader fa-lg me-2"></i>
+                    Ver Apostilas
+                </a>
+                <a href="https://www.cambridgeenglish.org/exams-and-tests/cefr/" target="_blank" class="btn btn-lg btn-outline-primary fw-bold px-4 py-3 shadow-sm">
+                    <i class="fa-solid fa-globe fa-lg me-2"></i>
+                    Saiba mais sobre níveis A1-C2
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="text-end mt-3 mb-5 text-muted small">
+        <i class="fa-solid fa-circle-info text-primary"></i> Dica: Progrida no seu ritmo! Seu histórico é salvo automaticamente.
+    </div>
+</div>
+{% endblock %}
