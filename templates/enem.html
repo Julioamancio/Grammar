@@ -161,7 +161,7 @@ body, html { overflow-x: hidden;}
 </div>
 
 <script>
-// Atualiza quadro de medalhas ENEM (ajuste seu endpoint/backend para ENEM)
+// Atualiza quadro de medalhas ENEM (backend deve retornar {"ouro": N, "prata": N, "bronze": N})
 function atualizarQuadroMedalhasEnem() {
     fetch('/medalhas_enem')
         .then(res => res.json())
@@ -227,7 +227,7 @@ enemBtnVoltar.addEventListener("click", function() {
 // RECEBE mensagem do exercício (iframe) quando ganhar medalha
 window.addEventListener("message", function(event) {
     if (event.data && event.data.medalhaGanha) {
-        atualizarQuadroMedalhasEnem();
+        setTimeout(atualizarQuadroMedalhasEnem, 120); // Pequeno delay para garantir atualização
     }
 });
 

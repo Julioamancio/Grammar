@@ -19,6 +19,10 @@ app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = 'julioamancio2014@email.com'
 app.config['MAIL_PASSWORD'] = 'bbkdgkdekincbdlq'
 
+# Corrige possíveis problemas de sessão no localhost
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
+app.config['SESSION_COOKIE_SECURE'] = False
+
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
@@ -279,8 +283,8 @@ def enem_exercicio(modulo):
         "musica", "charge", "tirinha", "cartum", "poema",
         "texto_jornalistico", "publicidade", "texto_cientifico",
         "texto_opinativo", "texto_informativo", "dialogo",
-        "anuncio_classificado", "letra_musica", "reportagem",
-        "mapa_grafico", "outros"
+        "anuncio", "anuncio_classificado", "letra_musica", "reportagem",
+        "grafico", "mapa_grafico", "outros"
     }
     if modulo not in permitidos:
         return "Exercício não encontrado", 404
