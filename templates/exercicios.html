@@ -6,14 +6,41 @@
 <style>
 /* ... todo seu CSS permanece igual ... */
 .ex-main-content { width: 100vw; min-height: 100vh; display: flex; flex-direction: column; align-items: center; background: #f8fafc;}
-.ex-medalha-quadro { width: 100%; max-width: 540px; margin: 32px auto 22px auto; background: #fffbe9; border-radius: 18px; box-shadow: 0 2px 8px #ffb30022; padding: 22px 32px 16px 32px; display: flex; align-items: center; justify-content: center; gap: 38px; border: 1.5px solid #ffe082; font-size: 1.18em;}
+.ex-medalha-quadro { background: #fffbe9; border-radius: 18px; box-shadow: 0 2px 8px #ffb30022; padding: 22px 32px 16px 32px; display: flex; align-items: center; justify-content: center; gap: 38px; border: 1.5px solid #ffe082; font-size: 1.18em; margin: 32px auto 22px auto; max-width: 540px; width: 100%; }
 .ex-medalha-box { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; min-width: 100px;}
 .ex-medalha-num { font-weight: bold; font-size: 1.7em; color: #222; margin-bottom: 2px; font-family: 'Inter', 'Segoe UI', Arial, sans-serif; letter-spacing: .5px;}
 .ex-medalha-ouro   { color: #ffb300; text-shadow: 0 1px 6px #ffecb3; }
 .ex-medalha-prata  { color: #90caf9; text-shadow: 0 1px 6px #e3f2fd; }
 .ex-medalha-bronze { color: #bcaaa4; text-shadow: 0 1px 6px #efebe9; }
 .ex-medalha-label { font-size: 1em; font-weight: 600; margin-top: 1px; color: #7b7b7b; letter-spacing: .5px; display: flex; align-items: center; gap: 4px;}
-@media (max-width: 700px) { .ex-medalha-quadro { flex-direction: column; gap: 8px; padding: 12px 10px;} .ex-medalha-box { min-width: 0; } }
+/* Reset Button - NOVO: Colocado abaixo do quadro de medalhas, centralizado */
+.reset-medalhas-btn {
+  background: #f44336;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 26px;
+  font-size: 1.07em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 auto 10px auto;
+  box-shadow: 0 2px 8px #ffb30022;
+  position: relative;
+}
+.reset-medalhas-btn:hover { background: #b71c1c; }
+@media (max-width: 900px) {
+  .ex-medalha-quadro { flex-direction: column; gap: 12px; padding: 16px 12px 10px 12px; }
+  .reset-medalhas-btn { width: 92vw; max-width: 320px; justify-content: center; }
+}
+@media (max-width: 700px) {
+  .ex-medalha-quadro { padding: 12px 7px 8px 7px; }
+  .ex-medalha-box { min-width: 0; }
+  .reset-medalhas-btn { width: 99vw; max-width: 98vw; }
+}
 #ex-menu-area { width: 100%; display: flex; flex-direction: column; align-items: center; margin-top: 0; transition: opacity .3s;}
 .ex-menu-center-area { width: 100%; display: flex; justify-content: center; align-items: flex-start; gap: 38px; margin-top: 10px;}
 @media (max-width: 1150px) { .ex-menu-center-area { flex-direction: column; align-items: center; gap: 18px; } }
@@ -68,6 +95,10 @@ body, html { overflow-x: hidden;}
             </span>
         </div>
     </div>
+    <!-- Botão reset medalhas: abaixo do quadro, centralizado, visível e elegante -->
+    <button id="reset-medalhas-btn" class="reset-medalhas-btn" title="Resetar todas as medalhas de TODOS os níveis">
+        <i class="fa-solid fa-rotate-right"></i> Resetar Medalhas
+    </button>
 
     <!-- MENU E DESCRIÇÃO CENTRALIZADOS EM GRID FLEX -->
     <div id="ex-menu-area">
@@ -121,16 +152,13 @@ body, html { overflow-x: hidden;}
 </div>
 
 <script>
-// --------------- PLACAR DE MEDALHAS SINCRONIZADO COM EXERCÍCIOS ---------------
-
 function atualizarQuadroMedalhasBackend() {
-    fetch('/minhas_medalhas')
+    fetch('/medalhas')
         .then(res => res.json())
         .then(data => {
             document.getElementById('medalha-ouro-num').textContent = data.ouro || 0;
             document.getElementById('medalha-prata-num').textContent = data.prata || 0;
             document.getElementById('medalha-bronze-num').textContent = data.bronze || 0;
-            // Salva como cache
             localStorage.setItem('ex_medalhas', JSON.stringify({
                 ouro: data.ouro || 0,
                 prata: data.prata || 0,
@@ -138,7 +166,6 @@ function atualizarQuadroMedalhasBackend() {
             }));
         });
 }
-
 document.addEventListener('DOMContentLoaded', atualizarQuadroMedalhasBackend);
 
 const exMenuArea = document.getElementById("ex-menu-area");
@@ -160,6 +187,7 @@ btnAbrir.addEventListener("click", function() {
     iframeEx.src = route;
     window.scrollTo(0,0);
     document.body.style.overflowX = "hidden";
+    setTimeout(atualizarQuadroMedalhasBackend, 400);
 });
 
 btnVoltar.addEventListener("click", function() {
@@ -168,7 +196,7 @@ btnVoltar.addEventListener("click", function() {
     iframeEx.src = "";
     window.scrollTo(0,0);
     document.body.style.overflowX = "";
-    setTimeout(atualizarQuadroMedalhasBackend, 200);
+    setTimeout(atualizarQuadroMedalhasBackend, 400);
 });
 
 // RECEBE mensagem do exercício (iframe) quando ganhar medalha
@@ -177,5 +205,26 @@ window.addEventListener("message", function(event) {
         atualizarQuadroMedalhasBackend();
     }
 });
+
+// ================= BOTÃO DE RESET DE MEDALHAS (PROFISSIONAL) ================
+document.getElementById('reset-medalhas-btn').onclick = async function() {
+  if (!confirm("Tem certeza que deseja resetar TODAS as medalhas de TODOS os níveis? Essa ação não pode ser desfeita!")) return;
+  try {
+    const resp = await fetch("/reset_medalhas", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({nivel: "ALL"})
+    });
+    const data = await resp.json();
+    if (data && data.status === "ok") {
+      alert("Todas as medalhas foram resetadas! Você pode recomeçar todos os níveis e conquistar novos ouros.");
+      atualizarQuadroMedalhasBackend();
+    } else {
+      alert("Erro ao resetar medalhas. Tente novamente.");
+    }
+  } catch (e) {
+    alert("Erro de comunicação com o servidor.");
+  }
+};
 </script>
 {% endblock %}

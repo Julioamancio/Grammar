@@ -164,17 +164,11 @@
   <div id="a2-root"></div>
 </div>
 
-<script>
-/**
- * Embaralha um array (Fisher–Yates shuffle).
- */
-function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
+<!-- Importa o script do sistema para integração com placar e medalhas -->
+<script src="/static/js/medalhas.js"></script>
 
+<script>
+// ====== COLE SUAS QUESTÕES E EXPLICAÇÕES LOGO ABAIXO ======
 const a2Topics = [
   {
     icon: "fa-clock-rotate-left", color: "#29b6f6", title: "Simple past (regular/irregular)", questions: [
@@ -376,12 +370,16 @@ const explicacoes2 = [
   ]
 ];
 
-/**
- * Evento: manipular tentativas e a lógica do quiz
- */
 let currentTopic = 0, currentQ = 0;
 let questoesTentativas = [];
 let totalQuestoes = 0;
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
 
 function embaralharTudo() {
   shuffle(a2Topics);
@@ -469,6 +467,11 @@ function checkA2(val) {
     medalObj.medalha = medalByAttempts(medalObj.tentativas);
     showGabarito(medalObj, t, q, qidx);
     renderMedalsStatus();
+
+    // REGISTRA MEDALHA E AVISA O MENU PRINCIPAL
+    if (typeof premiarMedalha === "function") {
+      premiarMedalha("A2", qidx + 1, medalTypes[medalObj.medalha].name.toLowerCase());
+    }
   } else {
     radios.forEach(inp => inp.checked = false);
     const labels = document.querySelectorAll('.a2-options label');
@@ -577,11 +580,8 @@ function renderMedalsStatus(showAll = false) {
 
 function getExplicacao2(topicIdx, qIdx) {
   if (explicacoes2[topicIdx] && explicacoes2[topicIdx][qIdx]) {
-    // Tenta buscar pelo índice exato, mas se não existir array grande, retorna genérico
     const arr = explicacoes2[topicIdx][qIdx];
     if (arr) {
-      // Para erro, retornamos a primeira explicação do conjunto
-      // (já que estamos apenas dando uma dica)
       return arr[0] || "Confira a explicação do tópico.";
     }
   }
@@ -590,8 +590,8 @@ function getExplicacao2(topicIdx, qIdx) {
 
 const medalTypes = [
   { name: "Ouro", icon: "fa-medal", class: "a2-medal-gold", emoji: "🥇" },
-  { name: "Prata", icon: "fa-medal", class: "a2-medal-silver", emoji: "🥈" },
-  { name: "Bronze", icon: "a2-medal-bronze", emoji: "🥉" }
+  { name: "Prata", icon: "fa-medal-silver", class: "a2-medal-silver", emoji: "🥈" },
+  { name: "Bronze", icon: "fa-medal-bronze", class: "a2-medal-bronze", emoji: "🥉" }
 ];
 
 const medalByAttempts = (n) => n === 1 ? 0 : n === 2 ? 1 : 2;

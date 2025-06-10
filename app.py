@@ -152,13 +152,20 @@ def registrar_medalha():
     medalha = data.get('medalha')  # 'ouro', 'prata', 'bronze'
     if not (nivel and questao is not None and medalha):
         return jsonify({'status': 'erro', 'mensagem': 'Dados incompletos'}), 400
+
     existente = MedalhaProgresso.query.filter_by(
         user_id=current_user.id,
         nivel=nivel,
         questao=questao
     ).first()
+
     if existente:
-        return jsonify({'status': 'ok', 'medalha': None})  # Já tem medalha, não premia de novo
+        medalha_rank = {'ouro': 3, 'prata': 2, 'bronze': 1}
+        if medalha_rank.get(medalha, 0) > medalha_rank.get(existente.medalha, 0):
+            existente.medalha = medalha
+            db.session.commit()
+            return jsonify({'status': 'ok', 'medalha': medalha})
+        return jsonify({'status': 'ok', 'medalha': None})
     nova = MedalhaProgresso(
         user_id=current_user.id,
         nivel=nivel,
@@ -169,14 +176,25 @@ def registrar_medalha():
     db.session.commit()
     return jsonify({'status': 'ok', 'medalha': medalha})
 
-@app.route('/minhas_medalhas', methods=['GET'])
+@app.route('/medalhas', methods=['GET'])
 @login_required
-def minhas_medalhas():
+def medalhas():
     medalhas = MedalhaProgresso.query.filter_by(user_id=current_user.id).all()
     contagem = {'ouro': 0, 'prata': 0, 'bronze': 0}
     for m in medalhas:
         if m.medalha in contagem:
             contagem[m.medalha] += 1
+    return jsonify(contagem)
+
+@app.route('/minhas_medalhas', methods=['GET'])
+@login_required
+def minhas_medalhas():
+    medalhas = MedalhaProgresso.query.filter_by(user_id=current_user.id).all()
+    contagem = {'ouro': 0, 'prata': 0, 'bronze': 0, 'questoes': {}}
+    for m in medalhas:
+        if m.medalha in contagem:
+            contagem[m.medalha] += 1
+        contagem['questoes'][f"{m.nivel}-{m.questao}"] = m.medalha
     return jsonify(contagem)
 
 def gerar_certificado_pdf(nome, nivel, resultado):
@@ -210,7 +228,6 @@ def enviar_resultado():
     if not (nivel and resultado is not None):
         return jsonify({'status': 'erro', 'mensagem': 'Dados incompletos'}), 400
     resultado = int(resultado)
-    # Atualiza progresso e libera certificado se passou
     if resultado >= 60:
         prox = proximo_nivel(nivel)
         if prox:
@@ -253,6 +270,114 @@ def enviar_resultado():
             'mensagem': 'Pontuação insuficiente para obter o certificado (mínimo 60%).',
             'aprovado': False
         })
+
+# --- NOVA ROTA PARA SERVIR EXERCÍCIOS ENEM COMO TEMPLATE (PROFISSIONAL E SEGURO) ---
+@app.route('/enem/exercicio/<modulo>')
+@login_required
+def enem_exercicio(modulo):
+    permitidos = {
+        "musica", "charge", "tirinha", "cartum", "poema",
+        "texto_jornalistico", "publicidade", "texto_cientifico",
+        "texto_opinativo", "texto_informativo", "dialogo",
+        "anuncio_classificado", "letra_musica", "reportagem",
+        "mapa_grafico", "outros"
+    }
+    if modulo not in permitidos:
+        return "Exercício não encontrado", 404
+    return render_template(f'enem/{modulo}.html')
+
+@app.route('/enem-questoes')
+@login_required
+def enem_questoes():
+    return render_template('enem.html')
+
+@app.route('/reset_medalhas', methods=['POST'])
+@login_required
+def reset_medalhas():
+    data = request.json
+    nivel = data.get('nivel')
+    if not nivel:
+        return jsonify({'status': 'erro', 'mensagem': 'Nível não especificado.'}), 400
+    if nivel == "ALL":
+        MedalhaProgresso.query.filter_by(user_id=current_user.id).delete()
+        if 'medalhas_enem' in session:
+            session['medalhas_enem'][str(current_user.id)] = {}
+            session.modified = True
+    else:
+        MedalhaProgresso.query.filter_by(user_id=current_user.id, nivel=nivel).delete()
+        if nivel.startswith("ENEM_") and 'medalhas_enem' in session:
+            usuario = str(current_user.id)
+            if usuario in session['medalhas_enem'] and nivel in session['medalhas_enem'][usuario]:
+                del session['medalhas_enem'][usuario][nivel]
+                session.modified = True
+    db.session.commit()
+    return jsonify({'status': 'ok'})
+
+# === ROTAS EXCLUSIVAS PARA MEDALHAS ENEM (session-based, não banco!) ===
+
+@app.route('/registrar_medalha_enem', methods=['POST'])
+@login_required
+def registrar_medalha_enem():
+    data = request.json
+    nivel = data.get('nivel')
+    questao = str(data.get('questao'))
+    medalha = data.get('medalha')
+    usuario = str(current_user.id)
+    if not (nivel and questao and medalha):
+        return jsonify({'status': 'erro', 'mensagem': 'Dados incompletos'}), 400
+
+    medalhas_enem = session.get('medalhas_enem', {})
+    user_medalhas = medalhas_enem.get(usuario, {})
+    nivel_medalhas = user_medalhas.get(nivel, {})
+
+    medalha_rank = {'ouro': 3, 'prata': 2, 'bronze': 1}
+    medalha_atual = nivel_medalhas.get(questao)
+    if medalha_atual:
+        if medalha_rank[medalha] > medalha_rank.get(medalha_atual, 0):
+            nivel_medalhas[questao] = medalha
+        else:
+            medalha = medalha_atual
+    else:
+        nivel_medalhas[questao] = medalha
+
+    user_medalhas[nivel] = nivel_medalhas
+    medalhas_enem[usuario] = user_medalhas
+    session['medalhas_enem'] = medalhas_enem
+    session.modified = True
+    return jsonify({'medalha': medalha})
+
+@app.route('/minhas_medalhas_enem')
+@login_required
+def minhas_medalhas_enem():
+    nivel = request.args.get('nivel')
+    usuario = str(current_user.id)
+    medalhas_enem = session.get('medalhas_enem', {}).get(usuario, {})
+    if nivel:
+        return jsonify({'questoes': medalhas_enem.get(nivel, {})})
+    else:
+        return jsonify({'medalhas': medalhas_enem})
+
+@app.route('/medalhas_enem')
+@login_required
+def medalhas_enem_totais():
+    usuario = str(current_user.id)
+    medalhas_enem = session.get('medalhas_enem', {}).get(usuario, {})
+    total = {'ouro': 0, 'prata': 0, 'bronze': 0}
+    for nivel, questoes in medalhas_enem.items():
+        for med in questoes.values():
+            if med in total:
+                total[med] += 1
+    return jsonify(total)
+
+@app.route('/reset_medalhas_enem', methods=['POST'])
+@login_required
+def reset_medalhas_enem():
+    usuario = str(current_user.id)
+    medalhas_enem = session.get('medalhas_enem', {})
+    medalhas_enem[usuario] = {}
+    session['medalhas_enem'] = medalhas_enem
+    session.modified = True
+    return jsonify({'status': 'ok'})
 
 def inicializa_banco():
     with app.app_context():

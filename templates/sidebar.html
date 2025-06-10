@@ -15,6 +15,10 @@
     <a class="menu-btn{% if request.endpoint == 'exercicios' %} active{% endif %}" href="{{ url_for('exercicios') }}">
         <i class="fa-solid fa-dumbbell"></i> Grammar Exercises
     </a>
+    <!-- NOVO BOTÃO QUESTÕES DE ENEM -->
+    <a class="menu-btn{% if request.endpoint == 'enem_questoes' %} active{% endif %}" href="{{ url_for('enem_questoes') }}">
+        <i class="fa-solid fa-file-lines"></i> Questões de ENEM
+    </a>
     <form method="GET" action="{{ url_for('logout') }}" class="sidebar-logout">
         <button class="menu-btn" type="submit">
             <i class="fa-solid fa-arrow-right-from-bracket"></i> Sair

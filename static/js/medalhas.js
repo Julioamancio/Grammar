@@ -49,6 +49,24 @@
             });
     }
 
+    // ---- Função global para registrar medalha (chame sempre ao ganhar medalha em questão) ----
+    // Uso: premiarMedalha('A1', 3, 'ouro');
+    window.premiarMedalha = function premiarMedalha(nivel, questao, medalha) {
+        // Só registra se params válidos
+        if (!nivel || !questao || !medalha) return;
+        return fetch('/registrar_medalha', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({nivel, questao, medalha})
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data && data.medalha) {
+                setTimeout(atualizarQuadroMedalhas, 120);
+            }
+        });
+    };
+
     // ---- Intercepta fetch/AJAX globalmente para atualizar sempre que ganhar medalha ----
     function interceptaMedalha() {
         // Intercepta fetch API
@@ -101,4 +119,12 @@
         interceptaMedalha();
         setTimeout(atualizarQuadroMedalhas, 300); // Aguarda HTML carregar
     });
+
+    // Atualize sempre que voltar do menu, para garantir atualização visual das medalhas
+    window.addEventListener("message", function(event) {
+        if (event.data && event.data.medalhaGanha) {
+            setTimeout(atualizarQuadroMedalhas, 150);
+        }
+    });
+
 })();

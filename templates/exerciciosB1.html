@@ -18,7 +18,7 @@
     }
     .b1-title {
       font-size: 1.4em;
-      color: #ff9800;
+      color: #008cff;
       font-weight: bold;
       display: flex;
       align-items: center;
@@ -110,7 +110,7 @@
       display: inline-block;
     }
     .b1-next-btn {
-      background: #ff9800;
+      background: #00aeff;
       color: #fff;
       border: none;
       border-radius: 4px;
@@ -166,9 +166,9 @@
 <body>
 <div class="b1-ex-container">
   <div class="b1-navbar">
-    <a href="/exercicios" class="b1-back-button">
+    <!-- <a href="/exercicios" class="b1-back-button">
       <i class="fas fa-arrow-left" style="margin-right: 8px;"></i> Voltar ao Menu
-    </a>
+    </a> -->
   </div>
   <div class="b1-title">
     <i class="fa-solid fa-arrow-up-right-dots"></i>
@@ -177,13 +177,10 @@
   <div id="b1-medals"></div>
   <div id="b1-root"></div>
 </div>
+<!-- Integração automática do placar e medalhas -->
+<script src="/static/js/medalhas.js"></script>
 <script>
-function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
+// ====== COLE SUAS QUESTÕES LOGO ABAIXO ======
 const b1Topics = [
   {
     icon: "fa-clock-check", color: "#ff9800", title: "Present perfect (just, already, yet, ever, never)", questions: [
@@ -276,6 +273,7 @@ const b1Topics = [
     ]
   }
 ];
+
 const explicacoesB1 = b1Topics.map(topic => topic.questions.map(() => [
   "Veja a explicação do tópico para entender melhor!"
 ]));
@@ -288,6 +286,13 @@ const medalByAttempts = (n) => n === 1 ? 0 : n === 2 ? 1 : 2;
 let currentTopic = 0, currentQ = 0;
 let questoesTentativas = [];
 let totalQuestoes = 0;
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
 function embaralharTudo() {
   shuffle(b1Topics);
   b1Topics.forEach(topic => {
@@ -366,6 +371,11 @@ function checkB1(val) {
     medalObj.medalha = medalByAttempts(medalObj.tentativas);
     showGabarito(medalObj, t, q, qidx);
     renderMedalsStatus();
+
+    // REGISTRA MEDALHA E AVISA O MENU PRINCIPAL
+    if (typeof premiarMedalha === "function") {
+      premiarMedalha("B1", qidx + 1, medalTypes[medalObj.medalha].name.toLowerCase());
+    }
   } else {
     radios.forEach(inp => inp.checked = false);
     const labels = document.querySelectorAll('.b1-options label');
@@ -477,6 +487,7 @@ function medalIconHtml(idx) {
   if (idx === 1) return `<span class="b1-medal b1-medal-silver"><i class="fa-solid fa-medal"></i></span>`;
   return `<span class="b1-medal b1-medal-bronze"><i class="fa-solid fa-medal"></i></span>`;
 }
+// Inicialização profissional e segura
 inicializaQuestoes();
 renderB1Exercise();
 </script>

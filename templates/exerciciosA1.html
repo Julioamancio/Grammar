@@ -4,8 +4,6 @@
   <meta charset="utf-8">
   <title>Exercícios Interativos – Nível A1</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
-
   <style>
     .a1-ex-container {
       background: #fff;
@@ -391,38 +389,29 @@ const medalTypes = [
   { name: "Prata", icon: "fa-medal", class: "a1-medal-silver", emoji: "🥈" },
   { name: "Bronze", icon: "fa-medal-bronze", emoji: "🥉" }
 ];
-
 const medalByAttempts = (n) => n === 1 ? 0 : n === 2 ? 1 : 2;
-
 let currentTopic = 0, currentQ = 0;
 let questoesTentativas = [];
 let totalQuestoes = 0;
 
-/**
- * Inicialmente, embaralha:
- * - a lista de tópicos
- * - dentro de cada tópico, a lista de questões
- * - dentro de cada questão, as opções e o índice correto
- */
-function embaralharTudo() {
-  // Embaralha a lista de tópicos
-  shuffle(a1Topics);
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
 
-  // Para cada tópico, embaralha as questões
+function embaralharTudo() {
+  shuffle(a1Topics);
   a1Topics.forEach(topic => {
     shuffle(topic.questions);
     topic.questions.forEach(q => {
-      // Salva a resposta correta atual
       const correctAnswer = q.a[q.correct];
-      // Embaralha as opções
       shuffle(q.a);
-      // Redefine o índice 'correct' com base em onde a resposta correta foi parar
       q.correct = q.a.indexOf(correctAnswer);
     });
   });
 }
-
-// Inicializa tentativas para todas as questões
 function inicializaQuestoes() {
   embaralharTudo();
   questoesTentativas = [];
@@ -433,7 +422,6 @@ function inicializaQuestoes() {
   });
   totalQuestoes = questoesTentativas.length;
 }
-
 function getQuestaoIdx(topicIdx, qIdx) {
   let idx = 0;
   for (let t = 0; t < topicIdx; t++) {
@@ -441,7 +429,6 @@ function getQuestaoIdx(topicIdx, qIdx) {
   }
   return idx + qIdx;
 }
-
 function renderA1Exercise() {
   renderMedalsStatus();
   const t = a1Topics[currentTopic];
@@ -471,11 +458,9 @@ function renderA1Exercise() {
   `;
   document.getElementById('a1-root').innerHTML = html;
 
-  // Se já respondeu, marca correta, mostra botão próxima
   if (medalObj.answered) {
     showGabarito(medalObj, t, q, qidx);
   }
-
   document.getElementById('a1-options').onclick = function(e) {
     if (e.target.name === "a1" && !medalObj.answered) {
       checkA1(e.target.value);
@@ -483,7 +468,6 @@ function renderA1Exercise() {
   };
   document.getElementById('a1-next-btn').onclick = nextA1;
 }
-
 function checkA1(val) {
   val = +val;
   const t = a1Topics[currentTopic];
@@ -493,15 +477,16 @@ function checkA1(val) {
   medalObj.tentativas++;
 
   const radios = document.querySelectorAll('.a1-options input[type="radio"]');
-  // Se acertou
   if (val === q.correct) {
     medalObj.answered = true;
     medalObj.medalha = medalByAttempts(medalObj.tentativas);
     showGabarito(medalObj, t, q, qidx);
     renderMedalsStatus();
+
+    // REGISTRA MEDALHA E AVISA O MENU PRINCIPAL
+    premiarMedalha("A1", qidx + 1, medalTypes[medalObj.medalha].name.toLowerCase());
   } else {
-    // Mostra o erro e explicação
-    radios.forEach(inp => inp.checked = false); // desmarca
+    radios.forEach(inp => inp.checked = false);
     const labels = document.querySelectorAll('.a1-options label');
     labels.forEach((label, i) => {
       label.classList.remove('correct', 'incorrect');
@@ -512,7 +497,6 @@ function checkA1(val) {
        <div class="a1-explanation">${getExplicacao(currentTopic, currentQ, q.a[val], q.correct)}</div>`;
   }
 }
-
 function showGabarito(medalObj, t, q, qidx) {
   const labels = document.querySelectorAll('.a1-options label');
   labels.forEach((label, i) => {
@@ -533,7 +517,6 @@ function showGabarito(medalObj, t, q, qidx) {
   fb.innerHTML = `<span style="color:#43a047;"><i class="fa-solid fa-circle-check"></i> Correto!</span> ${medalTxt}`;
   document.getElementById('a1-next-btn').style.display = "inline-block";
 }
-
 function nextA1() {
   const t = a1Topics[currentTopic];
   if (currentQ < t.questions.length - 1) {
@@ -547,12 +530,10 @@ function nextA1() {
   }
   renderA1Exercise();
 }
-
 function getA1Progress() {
   let done = questoesTentativas.filter(q => q.answered).length;
   return `${done}/${totalQuestoes}`;
 }
-
 function showA1Result() {
   let ouro = questoesTentativas.filter(q => q.answered && q.medalha === 0).length;
   let percent = Math.round((ouro / totalQuestoes) * 100);
@@ -580,13 +561,11 @@ function showA1Result() {
     });
   }
 }
-
 function medalIconHtml(idx) {
   if (idx === 0) return `<span class="a1-medal a1-medal-gold"><i class="fa-solid fa-medal"></i></span>`;
   if (idx === 1) return `<span class="a1-medal a1-medal-silver"><i class="fa-solid fa-medal"></i></span>`;
   return `<span class="a1-medal a1-medal-bronze"><i class="fa-solid fa-medal"></i></span>`;
 }
-
 function renderMedalsStatus(showAll = false) {
   let html = `<div class="a1-medals-row">`;
   let idx = 0;
@@ -610,35 +589,34 @@ function renderMedalsStatus(showAll = false) {
   html += `</div>`;
   document.getElementById('a1-medals').innerHTML = html;
 }
-
 function getExplicacao(topicIdx, qIdx, resposta, correctIdx) {
   if (explicacoes[topicIdx] && explicacoes[topicIdx][qIdx]) {
     return explicacoes[topicIdx][qIdx];
   }
   return "Veja a explicação do tópico para entender melhor!";
 }
-
-
-// Sempre que ganhar uma medalha (após o fetch para /registrar_medalha), avise o menu:
+// Função profissional: registra medalha e avisa o menu principal (placar do topo)
 function premiarMedalha(nivel, questao, medalha) {
-    return fetch('/registrar_medalha', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({nivel, questao, medalha})
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.medalha) {
-            // Notifica o pai (menu principal)
-            window.parent.postMessage({ medalhaGanha: true }, "*");
-        }
-    });
+  return fetch('/registrar_medalha', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({nivel, questao, medalha})
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.medalha) {
+      // Notifica o pai (menu principal)
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ medalhaGanha: true }, "*");
+      }
+    }
+  });
 }
-
-
-// Inicializa e mostra
-inicializaQuestoes();
-renderA1Exercise();
+// Inicialização segura
+if (Array.isArray(a1Topics) && a1Topics.length > 0) {
+  inicializaQuestoes();
+  renderA1Exercise();
+}
 </script>
 </body>
 </html>
