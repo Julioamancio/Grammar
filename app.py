@@ -280,11 +280,9 @@ def enviar_resultado():
 @login_required
 def enem_exercicio(modulo):
     permitidos = {
-        "musica", "charge", "tirinha", "cartum", "poema",
-        "texto_jornalistico", "publicidade", "texto_cientifico",
-        "texto_opinativo", "texto_informativo", "dialogo",
-        "anuncio", "anuncio_classificado", "letra_musica", "reportagem",
-        "grafico", "mapa_grafico", "outros"
+        "anuncio", "cartum", "charge", "cientifico", "dialogo",
+        "grafico", "informativo", "jornal", "musica", "opinativo",
+        "poema", "publicidade", "tirinha"
     }
     if modulo not in permitidos:
         return "Exercício não encontrado", 404
