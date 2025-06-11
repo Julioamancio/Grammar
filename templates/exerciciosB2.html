@@ -165,7 +165,6 @@
 </head>
 <body>
 <div class="b2-ex-container">
-
   <div class="b2-title">
     <i class="fa-solid fa-arrow-up-right-dots"></i>
     Exercícios Interativos – Nível B2
@@ -173,106 +172,102 @@
   <div id="b2-medals"></div>
   <div id="b2-root"></div>
 </div>
-<!-- Integração automática do placar e medalhas -->
 <script src="/static/js/medalhas.js"></script>
 <script>
-// ====== COLE SUAS QUESTÕES LOGO ABAIXO ======
+// ====== QUESTÕES B2 COM EXPLICAÇÃO EMBUTIDA PROFISSIONAL ======
 const b2Topics = [
   {
     icon: "fa-hourglass-half", color: "#ff9800", title: "Present perfect continuous", questions: [
-      { q: "She ___ (study) English for three years.", a: ["has been studying", "have been studying", "has studied"], correct: 0 },
-      { q: "I ___ (wait) for the bus since 7 o'clock.", a: ["have been waiting", "has been waiting", "have waited"], correct: 0 }
+      { q: "She ___ (study) English for three years.", a: ["has been studying", "have been studying", "has studied"], correct: 0, explicacao: "has been studying: Correto. 'She' (singular) + has been + verbo-ing para ações que começaram no passado e continuam." },
+      { q: "I ___ (wait) for the bus since 7 o'clock.", a: ["have been waiting", "has been waiting", "have waited"], correct: 0, explicacao: "have been waiting: Correto. 'I' + have been + verbo-ing para ações contínuas do passado até agora." }
     ]
   },
   {
     icon: "fa-clock-rotate-left", color: "#f57c00", title: "Past perfect", questions: [
-      { q: "By the time I arrived, they ___ (leave).", a: ["had left", "have left", "left"], correct: 0 },
-      { q: "She ___ (finish) her homework before dinner.", a: ["had finished", "have finished", "finished"], correct: 0 }
+      { q: "By the time I arrived, they ___ (leave).", a: ["had left", "have left", "left"], correct: 0, explicacao: "had left: Correto. Past perfect (had + particípio) para ação anterior a outra no passado." },
+      { q: "She ___ (finish) her homework before dinner.", a: ["had finished", "have finished", "finished"], correct: 0, explicacao: "had finished: Correto. Past perfect para algo feito antes de outro evento passado." }
     ]
   },
   {
     icon: "fa-recycle", color: "#009688", title: "Passive voice (various tenses)", questions: [
-      { q: "A new road ___ (build) in the city last year.", a: ["was built", "is built", "has built"], correct: 0 },
-      { q: "The problem ___ (solve) by next week.", a: ["will be solved", "is solved", "was solved"], correct: 0 }
+      { q: "A new road ___ (build) in the city last year.", a: ["was built", "is built", "has built"], correct: 0, explicacao: "was built: Correto. Passado simples na voz passiva (was/were + particípio)." },
+      { q: "The problem ___ (solve) by next week.", a: ["will be solved", "is solved", "was solved"], correct: 0, explicacao: "will be solved: Correto. Futuro simples passivo: will be + particípio." }
     ]
   },
   {
     icon: "fa-code-branch", color: "#3f51b5", title: "Third conditional", questions: [
-      { q: "If I ___ (know) about the party, I ___ (go).", a: ["had known / would have gone", "knew / would go", "have known / would have gone"], correct: 0 },
-      { q: "She ___ (pass) the exam if she ___ (study) harder.", a: ["would have passed / had studied", "would pass / studied", "had passed / would study"], correct: 0 }
+      { q: "If I ___ (know) about the party, I ___ (go).", a: ["had known / would have gone", "knew / would go", "have known / would have gone"], correct: 0, explicacao: "had known / would have gone: Correto. Third conditional: if + past perfect, would have + particípio." },
+      { q: "She ___ (pass) the exam if she ___ (study) harder.", a: ["would have passed / had studied", "would pass / studied", "had passed / would study"], correct: 0, explicacao: "would have passed / had studied: Correto. Third conditional para hipóteses irreais do passado." }
     ]
   },
   {
     icon: "fa-random", color: "#673ab7", title: "Mixed conditionals", questions: [
-      { q: "If I ___ (not/miss) the train, I ___ (be) here now.", a: ["hadn't missed / would be", "didn't miss / would have been", "haven't missed / would be"], correct: 0 },
-      { q: "If she ___ (study) medicine, she ___ (become) a doctor.", a: ["had studied / would be", "studied / would have become", "has studied / has become"], correct: 0 }
+      { q: "If I ___ (not/miss) the train, I ___ (be) here now.", a: ["hadn't missed / would be", "didn't miss / would have been", "haven't missed / would be"], correct: 0, explicacao: "hadn't missed / would be: Correto. Mixed conditional para consequência presente de uma condição passada." },
+      { q: "If she ___ (study) medicine, she ___ (become) a doctor.", a: ["had studied / would be", "studied / would have become", "has studied / has become"], correct: 0, explicacao: "had studied / would be: Correto. Condição passada, resultado presente." }
     ]
   },
   {
     icon: "fa-circle-question", color: "#00bcd4", title: "Modal verbs for deduction (must have, might have...)", questions: [
-      { q: "He isn't at home. He ___ (go) to the gym.", a: ["must have gone", "might went", "should have gone"], correct: 0 },
-      { q: "I'm not sure, but she ___ (forget) about the meeting.", a: ["might have forgotten", "must have forgot", "should forgot"], correct: 0 }
+      { q: "He isn't at home. He ___ (go) to the gym.", a: ["must have gone", "might went", "should have gone"], correct: 0, explicacao: "must have gone: Correto. Dedução de passado." },
+      { q: "I'm not sure, but she ___ (forget) about the meeting.", a: ["might have forgotten", "must have forgot", "should forgot"], correct: 0, explicacao: "might have forgotten: Correto. Possibilidade no passado." }
     ]
   },
   {
     icon: "fa-comment-alt", color: "#607d8b", title: "Reported speech (questions and commands)", questions: [
-      { q: "She asked me, 'Where are you going?' → She asked me ___.", a: ["where I was going", "where am I going", "where was I going"], correct: 0 },
-      { q: "He told me, 'Close the window.' → He told me ___.", a: ["to close the window", "that I close the window", "closing the window"], correct: 0 }
+      { q: "She asked me, 'Where are you going?' → She asked me ___.", a: ["where I was going", "where am I going", "where was I going"], correct: 0, explicacao: "where I was going: Correto. Reported speech: are → was." },
+      { q: "He told me, 'Close the window.' → He told me ___.", a: ["to close the window", "that I close the window", "closing the window"], correct: 0, explicacao: "to close the window: Correto. Reported command: tell + to + verbo." }
     ]
   },
   {
     icon: "fa-hammer", color: "#795548", title: "Causative form (have/get something done)", questions: [
-      { q: "I ___ (my hair / cut) every month.", a: ["have my hair cut", "cut my hair", "have cut my hair"], correct: 0 },
-      { q: "She ___ (her car / repair) last week.", a: ["had her car repaired", "repaired her car", "had repaired her car"], correct: 0 }
+      { q: "I ___ (my hair / cut) every month.", a: ["have my hair cut", "cut my hair", "have cut my hair"], correct: 0, explicacao: "have my hair cut: Correto. Causative: have/get + objeto + particípio." },
+      { q: "She ___ (her car / repair) last week.", a: ["had her car repaired", "repaired her car", "had repaired her car"], correct: 0, explicacao: "had her car repaired: Correto. Causative passado." }
     ]
   },
   {
     icon: "fa-link", color: "#4caf50", title: "Relative clauses (defining & non-defining)", questions: [
-      { q: "My brother, ___ lives in London, is coming to visit.", a: ["who", "which", "that"], correct: 0 },
-      { q: "The laptop ___ I bought last week is already broken.", a: ["that", "who", "which"], correct: 0 }
+      { q: "My brother, ___ lives in London, is coming to visit.", a: ["who", "which", "that"], correct: 0, explicacao: "who: Correto. Non-defining clause usa 'who' para pessoas." },
+      { q: "The laptop ___ I bought last week is already broken.", a: ["that", "who", "which"], correct: 0, explicacao: "that: Correto. Defining clause, objetos." }
     ]
   },
   {
     icon: "fa-random", color: "#607d8b", title: "Inversion with negative adverbs", questions: [
-      { q: "___ had I finished my meal when the phone rang.", a: ["Hardly", "No sooner", "Rarely"], correct: 1 },
-      { q: "___ do we see such kindness.", a: ["Rarely", "Never", "Seldomly"], correct: 0 }
+      { q: "___ had I finished my meal when the phone rang.", a: ["Hardly", "No sooner", "Rarely"], correct: 1, explicacao: "No sooner: Correto. Inversão: 'No sooner had...'" },
+      { q: "___ do we see such kindness.", a: ["Rarely", "Never", "Seldomly"], correct: 0, explicacao: "Rarely: Correto. Inversão com advérbio negativo." }
     ]
   },
   {
     icon: "fa-arrows-turn-to-dots", color: "#e65100", title: "Advanced phrasal verbs", questions: [
-      { q: "I ___ (run out of) sugar, so I can't make a cake.", a: ["have run out of", "ran out", "run out of"], correct: 0 },
-      { q: "She always ___ (come up with) great ideas.", a: ["comes up with", "come up with", "came up with"], correct: 0 }
+      { q: "I ___ (run out of) sugar, so I can't make a cake.", a: ["have run out of", "ran out", "run out of"], correct: 0, explicacao: "have run out of: Correto. Presente perfeito: have/has + particípio." },
+      { q: "She always ___ (come up with) great ideas.", a: ["comes up with", "come up with", "came up with"], correct: 0, explicacao: "comes up with: Correto. Presente simples para 'she'." }
     ]
   },
   {
     icon: "fa-person-rays", color: "#009688", title: "Expressions with get", questions: [
-      { q: "It took me a while to ___ (get used to) waking up early.", a: ["get used to", "get use to", "got used to"], correct: 0 },
-      { q: "We ___ (get something done) our house painted last year.", a: ["got", "get", "have"], correct: 0 }
+      { q: "It took me a while to ___ (get used to) waking up early.", a: ["get used to", "get use to", "got used to"], correct: 0, explicacao: "get used to: Correto. Expressão 'get used to' + verbo-ing." },
+      { q: "We ___ (get something done) our house painted last year.", a: ["got", "get", "have"], correct: 0, explicacao: "got: Correto. Passado de 'get' para causative." }
     ]
   },
   {
     icon: "fa-bullhorn", color: "#cddc39", title: "Emphasis with do/does/did", questions: [
-      { q: "I ___ like chocolate, even if you think I don't.", a: ["do", "does", "did"], correct: 0 },
-      { q: "She ___ finish her homework yesterday.", a: ["did", "does", "do"], correct: 0 }
+      { q: "I ___ like chocolate, even if you think I don't.", a: ["do", "does", "did"], correct: 0, explicacao: "do: Correto. Ênfase no presente." },
+      { q: "She ___ finish her homework yesterday.", a: ["did", "does", "do"], correct: 0, explicacao: "did: Correto. Ênfase no passado." }
     ]
   },
   {
     icon: "fa-ellipsis", color: "#8d6e63", title: "Ellipsis and substitution", questions: [
-      { q: "She loves ice cream, and so ___ I.", a: ["do", "did", "am"], correct: 0 },
-      { q: "He can't swim, and neither ___ I.", a: ["can", "do", "am"], correct: 0 }
+      { q: "She loves ice cream, and so ___ I.", a: ["do", "did", "am"], correct: 0, explicacao: "do: Correto. Ellipsis para 'so do I'." },
+      { q: "He can't swim, and neither ___ I.", a: ["can", "do", "am"], correct: 0, explicacao: "can: Correto. Ellipsis para 'neither can I'." }
     ]
   },
   {
     icon: "fa-layer-group", color: "#ff5722", title: "Complex noun phrases", questions: [
-      { q: "The girl with the long brown hair sitting next to you is my ___", a: ["sister", "brother", "friend"], correct: 0 },
-      { q: "The tall man wearing glasses and a blue suit is our new ___", a: ["teacher", "student", "driver"], correct: 0 }
+      { q: "The girl with the long brown hair sitting next to you is my ___", a: ["sister", "brother", "friend"], correct: 0, explicacao: "sister: Correto. A frase descreve uma garota, portanto é 'sister'." },
+      { q: "The tall man wearing glasses and a blue suit is our new ___", a: ["teacher", "student", "driver"], correct: 0, explicacao: "teacher: Correto. O contexto sugere um professor novo." }
     ]
   }
 ];
 
-const explicacoesB2 = b2Topics.map(topic => topic.questions.map(() => [
-  "Veja a explicação do tópico para entender melhor!"
-]));
 const medalTypes = [
   { name: "Ouro", icon: "fa-medal", class: "b2-medal-gold", emoji: "🥇" },
   { name: "Prata", icon: "fa-medal", class: "b2-medal-silver", emoji: "🥈" },
@@ -381,7 +376,7 @@ function checkB2(val) {
     });
     document.getElementById('b2-feedback').innerHTML =
       `<span style="color:#e53935;"><i class="fa-solid fa-circle-xmark"></i> Errou!</span>
-       <div class="b2-explanation">${getExplicacaoB2(currentTopic, currentQ)}</div>`;
+       <div class="b2-explanation">${q.explicacao}</div>`;
   }
 }
 function showGabarito(medalObj, t, q, qidx) {
@@ -401,7 +396,8 @@ function showGabarito(medalObj, t, q, qidx) {
     else
       medalTxt = `🥉 <b>Bronze conquistada!</b>`;
   }
-  fb.innerHTML = `<span style="color:#43a047;"><i class="fa-solid fa-circle-check"></i> Correto!</span> ${medalTxt}`;
+  fb.innerHTML = `<span style="color:#43a047;"><i class="fa-solid fa-circle-check"></i> Correto!</span> ${medalTxt}
+    <div class="b2-explanation">${q.explicacao}</div>`;
   document.getElementById('b2-next-btn').style.display = "inline-block";
 }
 function nextB2() {
@@ -469,21 +465,11 @@ function renderMedalsStatus(showAll = false) {
   html += `</div>`;
   document.getElementById('b2-medals').innerHTML = html;
 }
-function getExplicacaoB2(topicIdx, qIdx) {
-  if (explicacoesB2[topicIdx] && explicacoesB2[topicIdx][qIdx]) {
-    const arr = explicacoesB2[topicIdx][qIdx];
-    if (arr) {
-      return arr[0] || "Confira a explicação do tópico.";
-    }
-  }
-  return "Confira a explicação do tópico.";
-}
 function medalIconHtml(idx) {
   if (idx === 0) return `<span class="b2-medal b2-medal-gold"><i class="fa-solid fa-medal"></i></span>`;
   if (idx === 1) return `<span class="b2-medal b2-medal-silver"><i class="fa-solid fa-medal"></i></span>`;
   return `<span class="b2-medal b2-medal-bronze"><i class="fa-solid fa-medal"></i></span>`;
 }
-// Inicialização profissional e segura
 inicializaQuestoes();
 renderB2Exercise();
 </script>

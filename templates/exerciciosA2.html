@@ -141,7 +141,6 @@
       .a2-ex-container { padding: 2vw 2vw; }
     }
 
-    /* Realce do resultado final */
     .a2-end-message {
       text-align: center;
       padding: 25px 0;
@@ -164,222 +163,121 @@
   <div id="a2-root"></div>
 </div>
 
-<!-- Importa o script do sistema para integração com placar e medalhas -->
 <script src="/static/js/medalhas.js"></script>
-
 <script>
-// ====== COLE SUAS QUESTÕES E EXPLICAÇÕES LOGO ABAIXO ======
-const a2Topics = [
-  {
-    icon: "fa-clock-rotate-left", color: "#29b6f6", title: "Simple past (regular/irregular)", questions: [
-      { q: "I ___ to the cinema yesterday (go).", a: ["go", "went", "gone"], correct: 1 },
-      { q: "They ___ a big party last week (plan).", a: ["planned", "planed", "planning"], correct: 0 }
-    ]
-  },
-  {
-    icon: "fa-building-columns", color: "#1976d2", title: "Past of verb to be (was / were)", questions: [
-      { q: "He ___ very tired after the trip.", a: ["was", "were", "is"], correct: 0 },
-      { q: "They ___ excited about the concert.", a: ["are", "was", "were"], correct: 2 }
-    ]
-  },
-  {
-    icon: "fa-cubes", color: "#4caf50", title: "Countable and uncountable nouns", questions: [
-      { q: "How much ___ do we need for the cake?", a: ["flour", "flours", "flouring"], correct: 0 },
-      { q: "How many ___ do you want?", a: ["water", "bottles", "traffic"], correct: 1 }
-    ]
-  },
-  {
-    icon: "fa-circle-question", color: "#ffb300", title: "Some / any / much / many / a lot of", questions: [
-      { q: "Do you have ___ questions?", a: ["some", "any", "a lot"], correct: 1 },
-      { q: "There are ___ apples in the fridge.", a: ["much", "many", "any"], correct: 1 }
-    ]
-  },
-  {
-    icon: "fa-calendar-check", color: "#ab47bc", title: "Adverbs of frequency", questions: [
-      { q: "I ___ go to the gym (100% of the time).", a: ["never", "always", "often"], correct: 1 },
-      { q: "He ___ drinks coffee in the morning (about 70% of the time).", a: ["sometimes", "rarely", "often"], correct: 2 }
-    ]
-  },
-  {
-    icon: "fa-arrows-up-down", color: "#26a69a", title: "Comparatives and superlatives", questions: [
-      { q: "This building is ___ than that one.", a: ["taller", "tallest", "most tall"], correct: 0 },
-      { q: "It was the ___ movie I've ever seen.", a: ["badder", "worst", "worse"], correct: 1 }
-    ]
-  },
-  {
-    icon: "fa-people-carry-box", color: "#ff7043", title: "Object pronouns (me, him, us...)", questions: [
-      { q: "Could you help ___ with this box?", a: ["I", "me", "my"], correct: 1 },
-      { q: "I saw Mary and gave a book to ___", a: ["she", "her", "hers"], correct: 1 }
-    ]
-  },
-  {
-    icon: "fa-spinner", color: "#3949ab", title: "Present continuous (now)", questions: [
-      { q: "They ___ dinner at the moment.", a: ["have", "are having", "had"], correct: 1 },
-      { q: "Maria ___ on the phone right now.", a: ["talks", "talked", "is talking"], correct: 2 }
-    ]
-  },
-  {
-    icon: "fa-hand-holding-heart", color: "#8d6e63", title: "Future with going to", questions: [
-      { q: "I ___ visit my grandparents next week.", a: ["am going to", "will to", "am go"], correct: 0 },
-      { q: "They ___ travel abroad this summer.", a: ["are going to", "will going", "is going"], correct: 0 }
-    ]
-  },
-  {
-    icon: "fa-key", color: "#00897b", title: "Modal verbs (can/could/should)", questions: [
-      { q: "You ___ rest if you are tired.", a: ["could", "should", "can"], correct: 1 },
-      { q: "___ you open the window, please?", a: ["Could", "Should", "Must"], correct: 0 }
-    ]
-  },
-  {
-    icon: "fa-calendar-days", color: "#afb42b", title: "Prepositions of time (in, on, at)", questions: [
-      { q: "My birthday is ___ January.", a: ["on", "at", "in"], correct: 2 },
-      { q: "We have a meeting ___ 3 pm.", a: ["at", "on", "in"], correct: 0 }
-    ]
-  },
-  {
-    icon: "fa-book-question", color: "#f4511e", title: "Wh- questions in past/present", questions: [
-      { q: "___ did you go yesterday? I went to the park.", a: ["What", "Where", "Who"], correct: 1 },
-      { q: "___ is your favorite color? It's blue.", a: ["When", "Which", "What"], correct: 2 }
-    ]
-  },
-  {
-    icon: "fa-greater-than-equal", color: "#00838f", title: "Too / enough", questions: [
-      { q: "It's ___ cold to go out without a jacket.", a: ["enough", "too", "very"], correct: 1 },
-      { q: "I don't have ___ time to finish this task.", a: ["enough", "too", "very"], correct: 0 }
-    ]
-  },
-  {
-    icon: "fa-face-smile", color: "#00c853", title: "Like + verb-ing", questions: [
-      { q: "I ___ going to the cinema on weekends.", a: ["like", "liked", "like to"], correct: 0 },
-      { q: "She doesn't ___ watching horror movies.", a: ["like", "likes", "liking"], correct: 0 }
-    ]
-  },
-  {
-    icon: "fa-people-arrows-left-right", color: "#8e24aa", title: "Basic phrasal verbs (get up, turn on...)", questions: [
-      { q: "I ___ at 7 a.m. every day.", a: ["get up", "turn on", "pick up"], correct: 0 },
-      { q: "Please ___ the TV, I want to watch something.", a: ["pick up", "turn off", "turn on"], correct: 2 }
-    ]
-  }
-];
-
-const explicacoes2 = [
-  // Simple past
-  [
-    [
-      "went: Correto. Passado irregular de 'go'.",
-      "planned: Correto. Passado regular de 'plan' (plan + ned)."
-    ]
-  ],
-  // Past of verb to be
-  [
-    [
-      "was: Correto. 'He was tired.' É o passado singular de 'be'.",
-      "were: Correto. É o passado plural de 'be'. Para 'they', usamos 'were'."
-    ]
-  ],
-  // Countable/uncountable
-  [
-    [
-      "flour: Correto. 'Flour' é incontável.",
-      "bottles: Correto. 'Bottles' são contáveis."
-    ]
-  ],
-  // Some/any/much/many/a lot of
-  [
-    [
-      "any: Correto para perguntas ou negativas.",
-      "many: Correto para substantivos contáveis (apples)."
-    ]
-  ],
-  // Adverbs of frequency
-  [
-    [
-      "always: Correto (100%).",
-      "often: Correto (~70%)."
-    ]
-  ],
-  // Comparatives and superlatives
-  [
-    [
-      "taller: Correto. Comparativo (adj + er).",
-      "worst: Correto. Superlativo irregular de 'bad'."
-    ]
-  ],
-  // Object pronouns
-  [
-    [
-      "me: Correto. Objeto para 'I'.",
-      "her: Correto. Objeto para 'she'."
-    ]
-  ],
-  // Present continuous
-  [
-    [
-      "are having: Correto. Ação acontecendo agora.",
-      "is talking: Correto. Ação no momento."
-    ]
-  ],
-  // Future with going to
-  [
-    [
-      "am going to: Correto. Futuro planejado.",
-      "are going to: Correto. Para 'they'."
-    ]
-  ],
-  // Modal verbs
-  [
-    [
-      "should: Correto. Conselho ou recomendação.",
-      "Could: Correto. Pedido educado."
-    ]
-  ],
-  // Prepositions of time
-  [
-    [
-      "in: Correto. Meses usam 'in'.",
-      "at: Correto. Horas usam 'at'."
-    ]
-  ],
-  // Wh- questions in past/present
-  [
-    [
-      "Where: Correto. Perguntar 'onde' no passado.",
-      "What: Correto. Perguntar 'qual' no presente."
-    ]
-  ],
-  // Too / enough
-  [
-    [
-      "too: Correto. Indica 'excesso'.",
-      "enough: Correto. Significa 'suficiente'."
-    ]
-  ],
-  // Like + verb-ing
-  [
-    [
-      "like: Correto. Estrutura 'like + verbo-ing'.",
-      "like: Correto. Forma negativa também segue 'like + ing'."
-    ]
-  ],
-  // Basic phrasal verbs
-  [
-    [
-      "get up: Correto. 'Levantarse'.",
-      "turn on: Correto. 'Ligar' algo."
-    ]
-  ]
-];
-
-let currentTopic = 0, currentQ = 0;
-let questoesTentativas = [];
-let totalQuestoes = 0;
-
+/**
+ * Fisher–Yates shuffle.
+ */
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
 }
+
+// ====== QUESTÕES INTEGRADAS COM EXPLICAÇÃO EM CADA QUESTÃO ======
+const a2Topics = [
+  {
+    icon: "fa-clock-rotate-left", color: "#29b6f6", title: "Simple past (regular/irregular)", questions: [
+      { q: "I ___ to the cinema yesterday (go).", a: ["go", "went", "gone"], correct: 1, explicacao: "went: Correto. Passado irregular de 'go'." },
+      { q: "They ___ a big party last week (plan).", a: ["planned", "planed", "planning"], correct: 0, explicacao: "planned: Correto. Passado regular de 'plan' (plan + ned)." }
+    ]
+  },
+  {
+    icon: "fa-building-columns", color: "#1976d2", title: "Past of verb to be (was / were)", questions: [
+      { q: "He ___ very tired after the trip.", a: ["was", "were", "is"], correct: 0, explicacao: "was: Correto. 'He was tired.' É o passado singular de 'be'." },
+      { q: "They ___ excited about the concert.", a: ["are", "was", "were"], correct: 2, explicacao: "were: Correto. É o passado plural de 'be'. Para 'they', usamos 'were'." }
+    ]
+  },
+  {
+    icon: "fa-cubes", color: "#4caf50", title: "Countable and uncountable nouns", questions: [
+      { q: "How much ___ do we need for the cake?", a: ["flour", "flours", "flouring"], correct: 0, explicacao: "flour: Correto. 'Flour' é incontável." },
+      { q: "How many ___ do you want?", a: ["water", "bottles", "traffic"], correct: 1, explicacao: "bottles: Correto. 'Bottles' são contáveis." }
+    ]
+  },
+  {
+    icon: "fa-circle-question", color: "#ffb300", title: "Some / any / much / many / a lot of", questions: [
+      { q: "Do you have ___ questions?", a: ["some", "any", "a lot"], correct: 1, explicacao: "any: Correto para perguntas ou negativas." },
+      { q: "There are ___ apples in the fridge.", a: ["much", "many", "any"], correct: 1, explicacao: "many: Correto para substantivos contáveis (apples)." }
+    ]
+  },
+  {
+    icon: "fa-calendar-check", color: "#ab47bc", title: "Adverbs of frequency", questions: [
+      { q: "I ___ go to the gym (100% of the time).", a: ["never", "always", "often"], correct: 1, explicacao: "always: Correto (100%)." },
+      { q: "He ___ drinks coffee in the morning (about 70% of the time).", a: ["sometimes", "rarely", "often"], correct: 2, explicacao: "often: Correto (~70%)." }
+    ]
+  },
+  {
+    icon: "fa-arrows-up-down", color: "#26a69a", title: "Comparatives and superlatives", questions: [
+      { q: "This building is ___ than that one.", a: ["taller", "tallest", "most tall"], correct: 0, explicacao: "taller: Correto. Comparativo (adj + er)." },
+      { q: "It was the ___ movie I've ever seen.", a: ["badder", "worst", "worse"], correct: 1, explicacao: "worst: Correto. Superlativo irregular de 'bad'." }
+    ]
+  },
+  {
+    icon: "fa-people-carry-box", color: "#ff7043", title: "Object pronouns (me, him, us...)", questions: [
+      { q: "Could you help ___ with this box?", a: ["I", "me", "my"], correct: 1, explicacao: "me: Correto. Objeto para 'I'." },
+      { q: "I saw Mary and gave a book to ___", a: ["she", "her", "hers"], correct: 1, explicacao: "her: Correto. Objeto para 'she'." }
+    ]
+  },
+  {
+    icon: "fa-spinner", color: "#3949ab", title: "Present continuous (now)", questions: [
+      { q: "They ___ dinner at the moment.", a: ["have", "are having", "had"], correct: 1, explicacao: "are having: Correto. Ação acontecendo agora." },
+      { q: "Maria ___ on the phone right now.", a: ["talks", "talked", "is talking"], correct: 2, explicacao: "is talking: Correto. Ação no momento." }
+    ]
+  },
+  {
+    icon: "fa-hand-holding-heart", color: "#8d6e63", title: "Future with going to", questions: [
+      { q: "I ___ visit my grandparents next week.", a: ["am going to", "will to", "am go"], correct: 0, explicacao: "am going to: Correto. Futuro planejado." },
+      { q: "They ___ travel abroad this summer.", a: ["are going to", "will going", "is going"], correct: 0, explicacao: "are going to: Correto. Para 'they'." }
+    ]
+  },
+  {
+    icon: "fa-key", color: "#00897b", title: "Modal verbs (can/could/should)", questions: [
+      { q: "You ___ rest if you are tired.", a: ["could", "should", "can"], correct: 1, explicacao: "should: Correto. Conselho ou recomendação." },
+      { q: "___ you open the window, please?", a: ["Could", "Should", "Must"], correct: 0, explicacao: "Could: Correto. Pedido educado." }
+    ]
+  },
+  {
+    icon: "fa-calendar-days", color: "#afb42b", title: "Prepositions of time (in, on, at)", questions: [
+      { q: "My birthday is ___ January.", a: ["on", "at", "in"], correct: 2, explicacao: "in: Correto. Meses usam 'in'." },
+      { q: "We have a meeting ___ 3 pm.", a: ["at", "on", "in"], correct: 0, explicacao: "at: Correto. Horas usam 'at'." }
+    ]
+  },
+  {
+    icon: "fa-book-question", color: "#f4511e", title: "Wh- questions in past/present", questions: [
+      { q: "___ did you go yesterday? I went to the park.", a: ["What", "Where", "Who"], correct: 1, explicacao: "Where: Correto. Perguntar 'onde' no passado." },
+      { q: "___ is your favorite color? It's blue.", a: ["When", "Which", "What"], correct: 2, explicacao: "What: Correto. Perguntar 'qual' no presente." }
+    ]
+  },
+  {
+    icon: "fa-greater-than-equal", color: "#00838f", title: "Too / enough", questions: [
+      { q: "It's ___ cold to go out without a jacket.", a: ["enough", "too", "very"], correct: 1, explicacao: "too: Correto. Indica 'excesso'." },
+      { q: "I don't have ___ time to finish this task.", a: ["enough", "too", "very"], correct: 0, explicacao: "enough: Correto. Significa 'suficiente'." }
+    ]
+  },
+  {
+    icon: "fa-face-smile", color: "#00c853", title: "Like + verb-ing", questions: [
+      { q: "I ___ going to the cinema on weekends.", a: ["like", "liked", "like to"], correct: 0, explicacao: "like: Correto. Estrutura 'like + verbo-ing'." },
+      { q: "She doesn't ___ watching horror movies.", a: ["like", "likes", "liking"], correct: 0, explicacao: "like: Correto. Forma negativa também segue 'like + ing'." }
+    ]
+  },
+  {
+    icon: "fa-people-arrows-left-right", color: "#8e24aa", title: "Basic phrasal verbs (get up, turn on...)", questions: [
+      { q: "I ___ at 7 a.m. every day.", a: ["get up", "turn on", "pick up"], correct: 0, explicacao: "get up: Correto. 'Levantarse'." },
+      { q: "Please ___ the TV, I want to watch something.", a: ["pick up", "turn off", "turn on"], correct: 2, explicacao: "turn on: Correto. 'Ligar' algo." }
+    ]
+  }
+];
+
+const medalTypes = [
+  { name: "Ouro", icon: "fa-medal", class: "a2-medal-gold", emoji: "🥇" },
+  { name: "Prata", icon: "fa-medal", class: "a2-medal-silver", emoji: "🥈" },
+  { name: "Bronze", icon: "fa-medal", class: "a2-medal-bronze", emoji: "🥉" }
+];
+const medalByAttempts = (n) => n === 1 ? 0 : n === 2 ? 1 : 2;
+let currentTopic = 0, currentQ = 0;
+let questoesTentativas = [];
+let totalQuestoes = 0;
 
 function embaralharTudo() {
   shuffle(a2Topics);
@@ -392,7 +290,6 @@ function embaralharTudo() {
     });
   });
 }
-
 function inicializaQuestoes() {
   embaralharTudo();
   questoesTentativas = [];
@@ -403,7 +300,6 @@ function inicializaQuestoes() {
   });
   totalQuestoes = questoesTentativas.length;
 }
-
 function getQuestaoIdx(topicIdx, qIdx) {
   let idx = 0;
   for (let t = 0; t < topicIdx; t++) {
@@ -411,7 +307,6 @@ function getQuestaoIdx(topicIdx, qIdx) {
   }
   return idx + qIdx;
 }
-
 function renderA2Exercise() {
   renderMedalsStatus();
   const t = a2Topics[currentTopic];
@@ -481,7 +376,7 @@ function checkA2(val) {
     });
     document.getElementById('a2-feedback').innerHTML =
       `<span style="color:#e53935;"><i class="fa-solid fa-circle-xmark"></i> Errou!</span>
-       <div class="a2-explanation">${getExplicacao2(currentTopic, currentQ)}</div>`;
+       <div class="a2-explanation">${q.explicacao}</div>`;
   }
 }
 
@@ -502,7 +397,8 @@ function showGabarito(medalObj, t, q, qidx) {
     else
       medalTxt = `🥉 <b>Bronze conquistada!</b>`;
   }
-  fb.innerHTML = `<span style="color:#43a047;"><i class="fa-solid fa-circle-check"></i> Correto!</span> ${medalTxt}`;
+  fb.innerHTML = `<span style="color:#43a047;"><i class="fa-solid fa-circle-check"></i> Correto!</span> ${medalTxt}
+    <div class="a2-explanation">${q.explicacao}</div>`;
   document.getElementById('a2-next-btn').style.display = "inline-block";
 }
 
@@ -544,7 +440,6 @@ function showA2Result() {
   `;
   renderMedalsStatus(true);
 
-  // Exemplo de envio de resultado
   if (percent >= 60 && window.currentUserNivel !== undefined) {
     fetch("/enviar_resultado", {
       method: "POST",
@@ -577,24 +472,6 @@ function renderMedalsStatus(showAll = false) {
   html += `</div>`;
   document.getElementById('a2-medals').innerHTML = html;
 }
-
-function getExplicacao2(topicIdx, qIdx) {
-  if (explicacoes2[topicIdx] && explicacoes2[topicIdx][qIdx]) {
-    const arr = explicacoes2[topicIdx][qIdx];
-    if (arr) {
-      return arr[0] || "Confira a explicação do tópico.";
-    }
-  }
-  return "Confira a explicação do tópico.";
-}
-
-const medalTypes = [
-  { name: "Ouro", icon: "fa-medal", class: "a2-medal-gold", emoji: "🥇" },
-  { name: "Prata", icon: "fa-medal-silver", class: "a2-medal-silver", emoji: "🥈" },
-  { name: "Bronze", icon: "fa-medal-bronze", class: "a2-medal-bronze", emoji: "🥉" }
-];
-
-const medalByAttempts = (n) => n === 1 ? 0 : n === 2 ? 1 : 2;
 
 function medalIconHtml(idx) {
   if (idx === 0) return `<span class="a2-medal a2-medal-gold"><i class="fa-solid fa-medal"></i></span>`;

@@ -140,7 +140,6 @@
       .a1-ex-container { padding: 2vw 2vw; }
     }
 
-    /* Realce do resultado final */
     .a1-end-message {
       text-align: center;
       padding: 25px 0;
@@ -165,7 +164,7 @@
 
 <script>
 /**
- * Embaralha um array (Fisher–Yates shuffle).
+ * Fisher–Yates shuffle.
  */
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -174,214 +173,96 @@ function shuffle(array) {
   }
 }
 
+// TÓPICOS E QUESTÕES COM EXPLICAÇÃO EMBUTIDA PROFISSIONAL
 const a1Topics = [
-  
   {
     icon: "fa-user-check", color: "#29b6f6", title: "Verb to be", questions: [
-      { q: "At school, Luiza introduces herself to her classmates.\nLuiza is a teacher. She ___ a teacher.", a: ["is", "are", "am"], correct: 0 },
-      { q: "In class, Lucas is talking about how he feels today.\nLucas says: 'I ___ not tired.'", a: ["is", "are", "am"], correct: 2 },
-      { q: "Anna meets her friend in the hallway and wants to know how she is.\nAnna meets her friend and asks: '___ you happy today?'", a: ["Are", "Is", "Am"], correct: 0 }
+      { q: "At school, Luiza introduces herself to her classmates.\nLuiza is a teacher. She ___ a teacher.", a: ["is", "are", "am"], correct: 0, explicacao: "is: Correto. She → is.<br>are/am: <b>Errado.</b> Para 'she', o correto é 'is'.<br><b>Dica:</b> Para he/she/it usamos 'is'." },
+      { q: "In class, Lucas is talking about how he feels today.\nLucas says: 'I ___ not tired.'", a: ["is", "are", "am"], correct: 2, explicacao: "am: Correto. I → am.<br>is/are: <b>Errado.</b> Para 'I', usamos 'am'." },
+      { q: "Anna meets her friend in the hallway and wants to know how she is.\nAnna meets her friend and asks: '___ you happy today?'", a: ["Are", "Is", "Am"], correct: 0, explicacao: "are: Correto. You → are.<br>is/am: <b>Errado.</b> Para 'you', usamos 'are'." }
     ]
   },
   {
     icon: "fa-user", color: "#1976d2", title: "Subject pronouns", questions: [
-      { q: "Maria likes music and is playing a song for the class.\nMaria likes music. ___ plays the piano.", a: ["He", "It", "She"], correct: 2 },
-      { q: "Paul and I are friends who walk to school together every morning.\n___ go to school together.", a: ["We", "They", "You"], correct: 0 }
+      { q: "Maria likes music and is playing a song for the class.\nMaria likes music. ___ plays the piano.", a: ["He", "It", "She"], correct: 2, explicacao: "She: Correto. Maria = she (ela).<br>He: masculino.<br>It: coisas/animais." },
+      { q: "Paul and I are friends who walk to school together every morning.\n___ go to school together.", a: ["We", "They", "You"], correct: 0, explicacao: "We: Correto. 'Me and my friend' = 'nós' (we).<br>They: eles/elas. You: você/vocês." }
     ]
   },
   {
     icon: "fa-heart", color: "#e57373", title: "Possessive adjectives", questions: [
-      { q: "John is introducing himself to the class.\nJohn introduces himself: '___ name is John.'", a: ["My", "Your", "His"], correct: 0 },
-      { q: "Ana has a dog and wants to talk about it to her friends.\nAna has a dog. ___ dog is small.", a: ["Your", "Her", "His"], correct: 1 }
+      { q: "John is introducing himself to the class.\nJohn introduces himself: '___ name is John.'", a: ["My", "Your", "His"], correct: 0, explicacao: "My: Correto. Estou falando de mim mesmo.<br>Your/His: Errado, é sobre outra pessoa." },
+      { q: "Ana has a dog and wants to talk about it to her friends.\nAna has a dog. ___ dog is small.", a: ["Your", "Her", "His"], correct: 1, explicacao: "Her: Correto. 'Ana' = she; 'her dog'.<br>Your/His: Errado, não é 'você' ou masculino." }
     ]
   },
   {
     icon: "fa-calendar-day", color: "#43a047", title: "Simple present", questions: [
-      { q: "Every morning, he leaves home for school.\nHe ___ to school every day.", a: ["go", "goes", "going"], correct: 1 },
-      { q: "You are having lunch with your friend and want to know about his tastes.\nDo ___ like apples?", a: ["he", "you", "she"], correct: 1 }
+      { q: "Every morning, he leaves home for school.\nHe ___ to school every day.", a: ["go", "goes", "going"], correct: 1, explicacao: "goes: Correto. He/She/It + verbo + s.<br>go/going: Errado, falta o 's'." },
+      { q: "You are having lunch with your friend and want to know about his tastes.\nDo ___ like apples?", a: ["he", "you", "she"], correct: 1, explicacao: "you: Correto. Pergunta para 'você'.<br>he/she: Errado, não usamos para perguntas com 'do' para 'he/she'." }
     ]
   },
   {
     icon: "fa-book-open", color: "#ffb300", title: "Articles: a / an / the", questions: [
-      { q: "Ana tells the class about her job.\nAna is a teacher. She is ___ teacher.", a: ["an", "a", "the"], correct: 1 },
-      { q: "At the zoo, you see a big animal for the first time.\nAt the zoo, I saw ___ elephant.", a: ["a", "an", "the"], correct: 1 }
+      { q: "Ana tells the class about her job.\nAna is a teacher. She is ___ teacher.", a: ["an", "a", "the"], correct: 1, explicacao: "a: Correto. 'teacher' começa com som de consoante.<br>an: só para som de vogal.<br>the: artigo definido." },
+      { q: "At the zoo, you see a big animal for the first time.\nAt the zoo, I saw ___ elephant.", a: ["a", "an", "the"], correct: 1, explicacao: "an: Correto. 'elephant' começa com som de vogal.<br>a/the: Errado." }
     ]
   },
   {
     icon: "fa-clone", color: "#ab47bc", title: "Plural of nouns", questions: [
-      { q: "At the park, you see some kids playing.\nThere are two ___ in the park.", a: ["childs", "children", "childes"], correct: 1 }
+      { q: "At the park, you see some kids playing.\nThere are two ___ in the park.", a: ["childs", "children", "childes"], correct: 1, explicacao: "children: Correto. Plural irregular de 'child'.<br>childs/childes: Errado." }
     ]
   },
   {
     icon: "fa-location-dot", color: "#26a69a", title: "There is / There are", questions: [
-      { q: "You look at your classroom and notice something on the table.\nOn the table, there ___ a book.", a: ["is", "are", "am"], correct: 0 },
-      { q: "You are in the garden and see some animals.\nIn the garden, there ___ two cats.", a: ["is", "are", "am"], correct: 1 }
+      { q: "You look at your classroom and notice something on the table.\nOn the table, there ___ a book.", a: ["is", "are", "am"], correct: 0, explicacao: "is: Correto. Book é singular.<br>are/am: Errado." },
+      { q: "You are in the garden and see some animals.\nIn the garden, there ___ two cats.", a: ["is", "are", "am"], correct: 1, explicacao: "are: Correto. Two cats é plural.<br>is/am: Errado." }
     ]
   },
   {
     icon: "fa-map-pin", color: "#ff7043", title: "Prepositions of place", questions: [
-      { q: "You are looking for your cat and describe its location.\nThe cat is ___ the box.", a: ["in", "on", "under"], correct: 0 },
-      { q: "You see a book and describe where it is.\nThe book is ___ the table.", a: ["on", "in", "under"], correct: 0 }
+      { q: "You are looking for your cat and describe its location.\nThe cat is ___ the box.", a: ["in", "on", "under"], correct: 0, explicacao: "in: Correto. Dentro da caixa.<br>on/under: Errado." },
+      { q: "You see a book and describe where it is.\nThe book is ___ the table.", a: ["on", "in", "under"], correct: 0, explicacao: "on: Correto. Sobre a mesa.<br>in/under: Errado." }
     ]
   },
   {
     icon: "fa-hand-pointer", color: "#3949ab", title: "Demonstratives", questions: [
-      { q: "You are standing next to your friend and want to introduce him.\n___ is my friend.", a: ["These", "That", "This"], correct: 2 },
-      { q: "You point to some shoes far from you.\n___ are my shoes.", a: ["That", "Those", "These"], correct: 1 }
+      { q: "You are standing next to your friend and want to introduce him.\n___ is my friend.", a: ["These", "That", "This"], correct: 2, explicacao: "This: Correto. Perto e singular.<br>These/That: Errado." },
+      { q: "You point to some shoes far from you.\n___ are my shoes.", a: ["That", "Those", "These"], correct: 1, explicacao: "Those: Correto. Longe e plural.<br>That/These: Errado." }
     ]
   },
   {
     icon: "fa-bolt", color: "#f4511e", title: "Imperatives", questions: [
-      { q: "The classroom is hot and the teacher asks for your help.\nThe teacher says: '___ the window, please.'", a: ["Open", "Opens", "Opening"], correct: 0 }
+      { q: "The classroom is hot and the teacher asks for your help.\nThe teacher says: '___ the window, please.'", a: ["Open", "Opens", "Opening"], correct: 0, explicacao: "Open: Correto. Imperativo: verbo base.<br>Opens/Opening: Errado." }
     ]
   },
   {
     icon: "fa-question", color: "#00838f", title: "Basic question words", questions: [
-      { q: "You want to meet someone and ask their name.\n___ is your name?", a: ["Where", "What", "Who"], correct: 1 },
-      { q: "You are looking at a photo and want to know about a person in it.\n___ is your friend?", a: ["Who", "What", "Where"], correct: 0 }
+      { q: "You want to meet someone and ask their name.\n___ is your name?", a: ["Where", "What", "Who"], correct: 1, explicacao: "What: Correto. Para perguntar nome.<br>Where/Who: Errado." },
+      { q: "You are looking at a photo and want to know about a person in it.\n___ is your friend?", a: ["Who", "What", "Where"], correct: 0, explicacao: "Who: Correto. Pessoa.<br>What/Where: Errado." }
     ]
   },
   {
     icon: "fa-gift", color: "#00c853", title: "Have got / Has got", questions: [
-      { q: "Ana has a new bike and shows it to the class.\nAna has a new bike. She ___ a new bike.", a: ["have got", "has got", "got"], correct: 1 },
-      { q: "Lucas is talking about his family.\nLucas says: 'I ___ two brothers.'", a: ["have got", "has got", "got"], correct: 0 }
+      { q: "Ana has a new bike and shows it to the class.\nAna has a new bike. She ___ a new bike.", a: ["have got", "has got", "got"], correct: 1, explicacao: "has got: Correto. She/He/It → has got.<br>have got/got: Errado." },
+      { q: "Lucas is talking about his family.\nLucas says: 'I ___ two brothers.'", a: ["have got", "has got", "got"], correct: 0, explicacao: "have got: Correto. I/You/We/They → have got.<br>has got/got: Errado." }
     ]
   },
   {
     icon: "fa-s", color: "#8d6e63", title: "Possessive 's", questions: [
-      { q: "You see a car that belongs to John.\nThis car belongs to John. This is ___ car.", a: ["John's", "John", "Johns"], correct: 0 }
+      { q: "You see a car that belongs to John.\nThis car belongs to John. This is ___ car.", a: ["John's", "John", "Johns"], correct: 0, explicacao: "John's: Correto. Possessivo.<br>John/Johns: Errado." }
     ]
   },
   {
     icon: "fa-person-running", color: "#00897b", title: "Can (ability and permission)", questions: [
-      { q: "You are talking about your friend's abilities.\nShe ___ swim very well.", a: ["can", "can't", "cans"], correct: 0 },
-      { q: "You need to leave the classroom and ask the teacher for permission.\n___ I go to the bathroom?", a: ["Can", "Cans", "Does"], correct: 0 }
+      { q: "You are talking about your friend's abilities.\nShe ___ swim very well.", a: ["can", "can't", "cans"], correct: 0, explicacao: "can: Correto. Habilidade.<br>can't/cans: Errado." },
+      { q: "You need to leave the classroom and ask the teacher for permission.\n___ I go to the bathroom?", a: ["Can", "Cans", "Does"], correct: 0, explicacao: "Can: Correto. Pedido de permissão.<br>Cans/Does: Errado." }
     ]
   },
   {
     icon: "fa-link", color: "#afb42b", title: "Basic conjunctions", questions: [
-      { q: "You are talking about your favorite fruits.\nI like apples ___ oranges.", a: ["and", "but", "or"], correct: 0 },
-      { q: "You feel tired, so you decide to go to bed.\nI am tired, ___ I will go to bed.", a: ["but", "and", "so"], correct: 2 }
+      { q: "You are talking about your favorite fruits.\nI like apples ___ oranges.", a: ["and", "but", "or"], correct: 0, explicacao: "and: Correto. Adição.<br>but/or: Errado." },
+      { q: "You feel tired, so you decide to go to bed.\nI am tired, ___ I will go to bed.", a: ["but", "and", "so"], correct: 2, explicacao: "so: Correto. Resultado/consequência.<br>but/and: Errado." }
     ]
   }
-];
-
-
-const explicacoes = [
-  [
-    [
-      "is: Correto. She → is.<br>are/am: <b>Errado.</b> Para 'she', o correto é 'is'.<br><b>Dica:</b> Para he/she/it usamos 'is'."
-    ],
-    [
-      "am: Correto. I → am.<br>is/are: <b>Errado.</b> Para 'I', usamos 'am'."
-    ],
-    [
-      "are: Correto. You → are.<br>is/am: <b>Errado.</b> Para 'you', usamos 'are'."
-    ]
-  ],
-  [
-    [
-      "She: Correto. Maria = she (ela).<br>He: masculino.<br>It: coisas/animais."
-    ],
-    [
-      "We: Correto. 'Me and my friend' = 'nós' (we).<br>They: eles/elas. You: você/vocês."
-    ]
-  ],
-  [
-    [
-      "My: Correto. Estou falando de mim mesmo.<br>Your/His: Errado, é sobre outra pessoa."
-    ],
-    [
-      "Her: Correto. 'Ana' = she; 'her dog'.<br>Your/His: Errado, não é 'você' ou masculino."
-    ]
-  ],
-  [
-    [
-      "goes: Correto. He/She/It + verbo + s.<br>go/going: Errado, falta o 's'."
-    ],
-    [
-      "you: Correto. Pergunta para 'você'.<br>he/she: Errado, não usamos para perguntas com 'do' para 'he/she'."
-    ]
-  ],
-  [
-    [
-      "a: Correto. 'teacher' começa com som de consoante.<br>an: só para som de vogal.<br>the: artigo definido."
-    ],
-    [
-      "an: Correto. 'elephant' começa com som de vogal.<br>a/the: Errado."
-    ]
-  ],
-  [
-    [
-      "children: Correto. Plural irregular de 'child'.<br>childs/childes: Errado."
-    ]
-  ],
-  [
-    [
-      "is: Correto. Book é singular.<br>are/am: Errado."
-    ],
-    [
-      "are: Correto. Two cats é plural.<br>is/am: Errado."
-    ]
-  ],
-  [
-    [
-      "in: Correto. Dentro da caixa.<br>on/under: Errado."
-    ],
-    [
-      "on: Correto. Sobre a mesa.<br>in/under: Errado."
-    ]
-  ],
-  [
-    [
-      "This: Correto. Perto e singular.<br>These/That: Errado."
-    ],
-    [
-      "Those: Correto. Longe e plural.<br>That/These: Errado."
-    ]
-  ],
-  [
-    [
-      "Open: Correto. Imperativo: verbo base.<br>Opens/Opening: Errado."
-    ]
-  ],
-  [
-    [
-      "What: Correto. Para perguntar nome.<br>Where/Who: Errado."
-    ],
-    [
-      "Who: Correto. Pessoa.<br>What/Where: Errado."
-    ]
-  ],
-  [
-    [
-      "has got: Correto. She/He/It → has got.<br>have got/got: Errado."
-    ],
-    [
-      "have got: Correto. I/You/We/They → have got.<br>has got/got: Errado."
-    ]
-  ],
-  [
-    [
-      "John's: Correto. Possessivo.<br>John/Johns: Errado."
-    ]
-  ],
-  [
-    [
-      "can: Correto. Habilidade.<br>can't/cans: Errado."
-    ],
-    [
-      "Can: Correto. Pedido de permissão.<br>Cans/Does: Errado."
-    ]
-  ],
-  [
-    [
-      "and: Correto. Adição.<br>but/or: Errado."
-    ],
-    [
-      "so: Correto. Resultado/consequência.<br>but/and: Errado."
-    ]
-  ]
 ];
 
 const medalTypes = [
@@ -393,13 +274,6 @@ const medalByAttempts = (n) => n === 1 ? 0 : n === 2 ? 1 : 2;
 let currentTopic = 0, currentQ = 0;
 let questoesTentativas = [];
 let totalQuestoes = 0;
-
-function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
 
 function embaralharTudo() {
   shuffle(a1Topics);
@@ -482,8 +356,6 @@ function checkA1(val) {
     medalObj.medalha = medalByAttempts(medalObj.tentativas);
     showGabarito(medalObj, t, q, qidx);
     renderMedalsStatus();
-
-    // REGISTRA MEDALHA E AVISA O MENU PRINCIPAL
     premiarMedalha("A1", qidx + 1, medalTypes[medalObj.medalha].name.toLowerCase());
   } else {
     radios.forEach(inp => inp.checked = false);
@@ -494,7 +366,7 @@ function checkA1(val) {
     });
     document.getElementById('a1-feedback').innerHTML =
       `<span style="color:#e53935;"><i class="fa-solid fa-circle-xmark"></i> Errou!</span>
-       <div class="a1-explanation">${getExplicacao(currentTopic, currentQ, q.a[val], q.correct)}</div>`;
+       <div class="a1-explanation">${q.explicacao}</div>`;
   }
 }
 function showGabarito(medalObj, t, q, qidx) {
@@ -514,7 +386,8 @@ function showGabarito(medalObj, t, q, qidx) {
     else
       medalTxt = `🥉 <b>Bronze conquistada!</b>`;
   }
-  fb.innerHTML = `<span style="color:#43a047;"><i class="fa-solid fa-circle-check"></i> Correto!</span> ${medalTxt}`;
+  fb.innerHTML = `<span style="color:#43a047;"><i class="fa-solid fa-circle-check"></i> Correto!</span> ${medalTxt}
+    <div class="a1-explanation">${q.explicacao}</div>`;
   document.getElementById('a1-next-btn').style.display = "inline-block";
 }
 function nextA1() {
@@ -589,12 +462,6 @@ function renderMedalsStatus(showAll = false) {
   html += `</div>`;
   document.getElementById('a1-medals').innerHTML = html;
 }
-function getExplicacao(topicIdx, qIdx, resposta, correctIdx) {
-  if (explicacoes[topicIdx] && explicacoes[topicIdx][qIdx]) {
-    return explicacoes[topicIdx][qIdx];
-  }
-  return "Veja a explicação do tópico para entender melhor!";
-}
 // Função profissional: registra medalha e avisa o menu principal (placar do topo)
 function premiarMedalha(nivel, questao, medalha) {
   return fetch('/registrar_medalha', {
@@ -605,13 +472,13 @@ function premiarMedalha(nivel, questao, medalha) {
   .then(res => res.json())
   .then(data => {
     if (data.medalha) {
-      // Notifica o pai (menu principal)
       if (window.parent && window.parent !== window) {
         window.parent.postMessage({ medalhaGanha: true }, "*");
       }
     }
   });
 }
+
 // Inicialização segura
 if (Array.isArray(a1Topics) && a1Topics.length > 0) {
   inicializaQuestoes();

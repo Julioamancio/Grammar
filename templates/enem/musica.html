@@ -7,7 +7,6 @@
   
   <script src="/static/js/medalhas_enem.js"></script>
   <style>
-    /* ... seus estilos continuam iguais ... */
     .enem-music-ex-container { background: #fff; border-radius: 18px; max-width: 940px; margin: 26px auto 30px auto; box-shadow: 0 4px 32px #1976d215; padding: 32px 34px 25px 34px; display: flex; flex-direction: column; align-items: stretch; }
     .enem-music-title { font-size: 1.4em; color: #ab47bc; font-weight: bold; display: flex; align-items: center; gap: 12px; margin-bottom: 18px; margin-top: 0; justify-content: flex-start; }
     .enem-music-medals-row { display: flex; flex-wrap: wrap; gap: 13px 18px; margin-bottom: 20px; align-items: center; }
@@ -43,8 +42,7 @@
   <div id="enem-music-root"></div>
 </div>
 
-<!-- SÓ O SCRIPT DE MEDALHAS ENEM! -->
-<script src="/static/js/medalhasenem.js"></script>
+<script src="/static/js/medalhas_enem.js"></script>
 <script>
 // ====== QUESTÕES REAIS DE MÚSICA DO ENEM ======
 const enemMusicTopics = [
@@ -54,107 +52,139 @@ const enemMusicTopics = [
     title: "Leitura e Interpretação de Canções em Língua Inglesa",
     questions: [
       {
-        q: `<b>Leia o trecho da música "Imagine" (John Lennon, 1971):</b><br>
-        <i>"Imagine all the people<br>Living life in peace"</i>
-        <br><span style="font-size:0.97em;color:#888;">Fonte: <a href="https://www.azlyrics.com/lyrics/johnlennon/imagine.html" target="_blank">azlyrics.com</a></span>
+        q: `<b>Leia os versos da canção "Fall on Me" (R.E.M., 1986):</b><br>
+        <i>
+        "There's a problem, feathers, iron<br>
+        Bargain buildings, weights and pulleys<br>
+        Feathers hit the ground before the weight can leave the air"
+        </i>
+        <br><span style="font-size:0.97em;color:#888;">Fonte: <a href="https://www.azlyrics.com/lyrics/rem/fallonme.html" target="_blank">azlyrics.com</a></span>
         <br><br>
-        Sobre o trecho acima, assinale a alternativa correta:`,
+        A qual episódio (real ou hipotético) da história da física o trecho da música faz alusão?`,
         a: [
-          "O eu lírico expressa o desejo de viagens pelo mundo.",
-          "O texto apresenta uma crítica à falta de ambição pessoal.",
-          "O trecho sugere esperança em harmonia e paz entre as pessoas.",
-          "A canção exalta valores culturais tradicionais.",
-          "O autor faz referência ao sucesso individual."
+          { text: "À queda de uma maçã, que teria inspirado Newton à descoberta da gravitação universal.", isCorrect: false },
+          { text: "À observação de um pássaro em voo, que teria levado Einstein a formular a teoria da relatividade.", isCorrect: false },
+          { text: "Aos experimentos com objetos de massas diferentes, que teriam indicado a Galileu os princípios da queda livre.", isCorrect: true },
+          { text: "Ao transbordamento da água em uma banheira, que teria sugerido a Arquimedes o conceito de empuxo.", isCorrect: false },
+          { text: "À queda de um bloco de ferro ligado a uma hélice, que teria levado Joule à equivalência entre calor e energia.", isCorrect: false }
         ],
-        correct: 2
+        explicacao: "O trecho faz alusão ao princípio da queda livre e aos experimentos de Galileu Galilei, demonstrando que objetos de diferentes massas caem com a mesma aceleração na ausência de resistência do ar."
       },
+        {
+    q: `<b>Leia o trecho da canção "When Johnny comes marching home" (Patrick Sarsfield Gilmore):</b><br>
+    <i>
+    When Johnny comes marching home again<br>
+    Hurrah! Hurrah!<br>
+    We'll give him a hearty welcome then<br>
+    Hurrah! Hurrah!<br>
+    The men will cheer and the boys will shout<br>
+    The ladies they will all turn out<br>
+    </i>
+    <br>
+    <span style="font-size:0.97em;color:#888;">
+      Fonte: <a href="https://www.battlefields.org/learn/primary-sources/civil-war-music-when-johnny-comes-marching-home-again" target="_blank">battlefields.org</a>
+    </span>
+    <br><br>`,
+    a: [
+      { text: '“Ladies” is the singular form of “lady”.', isCorrect: false },
+      { text: '“Him” is a possessive pronoun.', isCorrect: false },
+      { text: '“Then” is a demonstrative pronoun.', isCorrect: false },
+      { text: '“When Johnny comes marching home” is in the Present Continuous tense.', isCorrect: false },
+      { text: '“We’ll give, the men will cheer, the boys will shout, the ladies will turn out” are in the Future Simple tense.', isCorrect: true }
+    ],
+    explicacao: `Alternativa correta: As frases “we’ll give”, “the men will cheer”, “the boys will shout”, “the ladies will turn out” estão no Future Simple, pois utilizam o auxiliar “will” para indicar ações futuras.<br><br>
+    `
+  },
+
+  {
+  q: `<b>Leia o trecho da canção "When Johnny comes marching home" (Patrick Sarsfield Gilmore):</b><br>
+  <i>
+  When Johnny comes marching home again<br>
+  Hurrah! Hurrah!<br>
+  We'll give him a hearty welcome then<br>
+  Hurrah! Hurrah!<br>
+  The men will cheer and the boys will shout<br>
+  The ladies they will all turn out<br>
+  </i>
+  <br>
+  <span style="font-size:0.97em;color:#888;">
+    Fonte: <a href="https://www.battlefields.org/learn/primary-sources/civil-war-music-when-johnny-comes-marching-home-again" target="_blank">battlefields.org</a>
+  </span>`,
+  a: [
+    { text: '“Ladies” is the singular form of “lady”.', isCorrect: false },
+    { text: '“Him” is a possessive pronoun.', isCorrect: false },
+    { text: '“Then” is a demonstrative pronoun.', isCorrect: false },
+    { text: '“When Johnny comes marching home” is in the Present Continuous tense.', isCorrect: false },
+    { text: '“We’ll give, the men will cheer, the boys will shout, the ladies will turn out” are in the Future Simple tense.', isCorrect: true }
+  ],
+  explicacao: `Alternativa correta: As frases “we’ll give”, “the men will cheer”, “the boys will shout”, “the ladies will turn out” estão no Future Simple, pois utilizam o auxiliar “will” para indicar ações futuras.`
+},
+
+
+{
+  q: `<b>Leia o trecho da música "The Logical Song" (Supertramp):</b><br>
+  <i>
+  When I was young, it seemed that life was so wonderful<br>
+  A miracle, oh, it was beautiful, magical<br>
+  And all the birds in the trees, well they'd be singing so happily<br>
+  Oh, joyfully, oh, playfully watching me<br>
+  But then they sent me away to teach me how to be sensible<br>
+  Logical, oh, responsible, practical<br>
+  Then they showed me a world where I could be so dependable<br>
+  Oh, clinical, oh, intellectual, cynical
+  </i>
+  <br>
+  <span style="font-size:0.97em;color:#888;">
+    Fonte: The Logical Song – Supertramp
+  </span>`,
+  a: [
+    { text: "um consistente amadurecimento pessoal e intelectual.", isCorrect: false },
+    { text: "um choque de realidades ao passar da juventude para a vida adulta.", isCorrect: true },
+    { text: "o aumento da sua sensibilidade com o chegar da maturidade.", isCorrect: false },
+    { text: "um forte apego às experiências que teve junto à natureza.", isCorrect: false },
+    { text: "uma grande elevação de sua moral durante o seu crescimento.", isCorrect: false }
+  ],
+  explicacao: `A canção descreve a juventude como mágica e alegre. Depois, o eu-lírico relata ser enviado para aprender a ser lógico, prático e responsável, passando a ver o mundo de forma clínica, intelectual e cínica. Isso indica um choque de realidade ao transitar da juventude para a vida adulta.`
+},
+                  
       {
-        q: `<b>Leia o trecho da música "Blowin' in the Wind" (Bob Dylan, 1962):</b><br>
-        <i>"How many roads must a man walk down<br>Before you call him a man?"</i>
-        <br><span style="font-size:0.97em;color:#888;">Fonte: <a href="https://www.azlyrics.com/lyrics/bobdylan/blowininthewind.html" target="_blank">azlyrics.com</a></span>
+        q: `<b>Leia o trecho da música "I hate it here" (Taylor Swift, 2024):</b><br>
+        <i>
+        "If comfort is a construct, I don't believe in good luck"<br>
+        ...<br>
+        Nostalgia is a mind's trick<br>
+        If I'd been there, I'd hate it<br>
+        It was freezing in the palace"
+        </i>
+        <br><span style="font-size:0.97em;color:#888;">Fonte: Taylor Swift, do álbum <i>The Tortured Poets Department</i>, 2024 (Adaptado).</span>
         <br><br>
-        O questionamento feito na letra sugere:`,
+        No texto, a percepção de "conforto como construído" indica que o eu lírico vê o conforto como`,
         a: [
-          "A importância de obedecer regras sociais.",
-          "Uma reflexão sobre as dificuldades enfrentadas para amadurecer e ser reconhecido.",
-          "A necessidade de realizar viagens longas.",
-          "Uma crítica ao consumismo exagerado.",
-          "O incentivo ao lazer e entretenimento."
+          { text: "refúgio mental para apaziguar as pressões e o descontentamento da vida.", isCorrect: false },
+          { text: "concepção ligada às experiências infantis em mecanismos de enfrentamento.", isCorrect: false },
+          { text: "conceito pressuposto, dependente da realidade concreta das pessoas.", isCorrect: false },
+          { text: "dificuldade de ter autoafirmação, por conta de questões internas pendentes.", isCorrect: false },
+          { text: "algo criado pela sociedade, produzindo falsa sensação de segurança.", isCorrect: true }
         ],
-        correct: 1
-      },
-      {
-        q: `<b>Leia o trecho da música "Redemption Song" (Bob Marley, 1980):</b><br>
-        <i>"Emancipate yourselves from mental slavery;<br>None but ourselves can free our minds."</i>
-        <br><span style="font-size:0.97em;color:#888;">Fonte: <a href="https://www.azlyrics.com/lyrics/bobmarley/redemptionsong.html" target="_blank">azlyrics.com</a></span>
-        <br><br>
-        Segundo a canção, a verdadeira liberdade é alcançada por meio de:`,
-        a: [
-          "Mudanças promovidas por líderes políticos.",
-          "Acúmulo de bens materiais.",
-          "Libertação da mente pelas próprias pessoas.",
-          "Viagens culturais pelo mundo.",
-          "Esquecimento dos problemas cotidianos."
-        ],
-        correct: 2
-      },
-      {
-        q: `<b>Leia o trecho da música "Yesterday" (The Beatles, 1965):</b><br>
-        <i>"Yesterday, all my troubles seemed so far away<br>Now it looks as though they're here to stay"</i>
-        <br><span style="font-size:0.97em;color:#888;">Fonte: <a href="https://www.azlyrics.com/lyrics/beatles/yesterday.html" target="_blank">azlyrics.com</a></span>
-        <br><br>
-        O sentimento predominante no trecho é de:`,
-        a: [
-          "Alegria por novas conquistas.",
-          "Nostalgia e tristeza pelas boas lembranças que ficaram no passado.",
-          "Raiva em relação ao presente.",
-          "Expectativa de mudanças futuras.",
-          "Entusiasmo diante de novos desafios."
-        ],
-        correct: 1
-      },
-      {
-        q: `<b>Leia o trecho da música "We Are The World" (USA for Africa, 1985):</b><br>
-        <i>"We are the world, we are the children<br>We are the ones who make a brighter day, so let's start giving"</i>
-        <br><span style="font-size:0.97em;color:#888;">Fonte: <a href="https://www.azlyrics.com/lyrics/usaafrica/wearetheworld.html" target="_blank">azlyrics.com</a></span>
-        <br><br>
-        O principal objetivo do trecho é:`,
-        a: [
-          "Incentivar a busca por realizações individuais.",
-          "Criticar estilos musicais contemporâneos.",
-          "Enfatizar a importância da solidariedade e da responsabilidade social.",
-          "Relatar um evento esportivo.",
-          "Narrar uma história fictícia."
-        ],
-        correct: 2
+        explicacao: `O eu lírico menciona que "conforto é um construto" e que não acredita em "boa sorte": "If comfort is a construct, I don't believe in good luck". Esta afirmação reflete uma visão crítica de que o conforto não é algo natural ou intrínseco, mas sim uma ideia que é construída socialmente. Portanto, essa construção cria uma falsa sensação de segurança e sugere que a realidade não é tão estável quanto parece, confirmando a alternativa da letra [E].`
       }
     ]
   }
 ];
 
-const enemMusicExplicacoes = [
-  [
-    "Alternativa correta: O trecho indica o desejo de paz e harmonia entre as pessoas, um tema central da canção 'Imagine'.",
-    "Alternativa correta: A música reflete sobre os desafios do amadurecimento e do reconhecimento social, indo além do sentido literal das palavras.",
-    "Alternativa correta: A canção incentiva a libertação da mente como caminho para a verdadeira liberdade, sendo responsabilidade de cada um.",
-    "Alternativa correta: O eu lírico expressa saudade e tristeza por momentos felizes que ficaram no passado, predominando o sentimento de nostalgia.",
-    "Alternativa correta: A letra convoca os ouvintes à solidariedade e ao engajamento coletivo para um mundo melhor."
-  ]
-];
-
 const medalTypes = [
   { name: "Ouro", icon: "fa-medal", class: "enem-music-medal-gold", emoji: "🥇" },
   { name: "Prata", icon: "fa-medal", class: "enem-music-medal-silver", emoji: "🥈" },
-  { name: "Bronze", icon: "enem-music-medal-bronze", emoji: "🥉" }
+  { name: "Bronze", icon: "fa-medal", class: "enem-music-medal-bronze", emoji: "🥉" }
 ];
 const medalByAttempts = (n) => n === 1 ? 0 : n === 2 ? 1 : 2;
 let currentTopic = 0, currentQ = 0;
 let questoesTentativas = [];
 let totalQuestoes = 0;
 
-// Use identificador ENEM para integração correta
 const ENEM_MUSIC_LEVEL = "ENEM_MUSICA";
 
+// Shuffle utilitário
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -167,11 +197,13 @@ function embaralharTudo() {
   enemMusicTopics.forEach(topic => {
     shuffle(topic.questions);
     topic.questions.forEach(q => {
-      const correctAnswer = q.a[q.correct];
       shuffle(q.a);
-      q.correct = q.a.indexOf(correctAnswer);
     });
   });
+}
+
+function getIndiceCorreta(q) {
+  return q.a.findIndex(alt => alt.isCorrect);
 }
 function inicializaQuestoes() {
   embaralharTudo();
@@ -182,7 +214,6 @@ function inicializaQuestoes() {
     });
   });
   totalQuestoes = questoesTentativas.length;
-  // Para integração com medalhasenem.js
   window.totalQuestoes = totalQuestoes;
   window.nivelAtual = ENEM_MUSIC_LEVEL;
 }
@@ -210,7 +241,7 @@ function renderEnemMusicExercise() {
       <form class="enem-music-options" id="enem-music-options">
         ${q.a.map((opt, i) => `
           <label>
-            <input type="radio" name="enem-music" value="${i}" ${medalObj.answered ? "disabled" : ""}> ${opt}
+            <input type="radio" name="enem-music" value="${i}" ${medalObj.answered ? "disabled" : ""}> ${opt.text}
           </label>
         `).join('')}
       </form>
@@ -233,6 +264,8 @@ function renderEnemMusicExercise() {
   };
   document.getElementById('enem-music-next-btn').onclick = nextEnemMusic;
 }
+
+// Sempre mostra a explicação correta da questão
 function checkEnemMusic(val) {
   val = +val;
   const t = enemMusicTopics[currentTopic];
@@ -241,18 +274,16 @@ function checkEnemMusic(val) {
   const medalObj = questoesTentativas[qidx];
   medalObj.tentativas++;
 
+  const correctIdx = getIndiceCorreta(q);
   const radios = document.querySelectorAll('.enem-music-options input[type="radio"]');
-  if (val === q.correct) {
+  if (val === correctIdx) {
     medalObj.answered = true;
     medalObj.medalha = medalByAttempts(medalObj.tentativas);
     showGabarito(medalObj, t, q, qidx);
     renderMedalsStatus();
-
-    // REGISTRA MEDALHA ENEM (Usa APENAS a função global do script de medalhasenem.js)
     if (typeof window.premiarMedalhaEnem === "function") {
       window.premiarMedalhaEnem(ENEM_MUSIC_LEVEL, qidx + 1, medalTypes[medalObj.medalha].name.toLowerCase());
     }
-    // Notifica o menu principal para atualizar imediatamente
     if (window.parent && window.parent !== window) {
       window.parent.postMessage({ medalhaGanha: true, modulo: ENEM_MUSIC_LEVEL }, "*");
     }
@@ -263,16 +294,18 @@ function checkEnemMusic(val) {
       label.classList.remove('correct', 'incorrect');
       if (i === val) label.classList.add('incorrect');
     });
+    // Mostrar a explicação correta da própria questão
     document.getElementById('enem-music-feedback').innerHTML =
       `<span style="color:#e53935;"><i class="fa-solid fa-circle-xmark"></i> Errou!</span>
-       <div class="enem-music-explanation">${getExplicacao(currentTopic, currentQ, q.a[val], q.correct)}</div>`;
+       <div class="enem-music-explanation">${q.explicacao}</div>`;
   }
 }
 function showGabarito(medalObj, t, q, qidx) {
+  const correctIdx = getIndiceCorreta(q);
   const labels = document.querySelectorAll('.enem-music-options label');
   labels.forEach((label, i) => {
     label.classList.remove('correct', 'incorrect');
-    if (i === q.correct) label.classList.add('correct');
+    if (i === correctIdx) label.classList.add('correct');
   });
   document.querySelectorAll('.enem-music-options input[type="radio"]').forEach(inp => inp.disabled = true);
   const fb = document.getElementById('enem-music-feedback');
@@ -285,7 +318,8 @@ function showGabarito(medalObj, t, q, qidx) {
     else
       medalTxt = `🥉 <b>Bronze conquistada!</b>`;
   }
-  fb.innerHTML = `<span style="color:#43a047;"><i class="fa-solid fa-circle-check"></i> Correto!</span> ${medalTxt}`;
+  fb.innerHTML = `<span style="color:#43a047;"><i class="fa-solid fa-circle-check"></i> Correto!</span> ${medalTxt}
+      <div class="enem-music-explanation">${q.explicacao}</div>`;
   document.getElementById('enem-music-next-btn').style.display = "inline-block";
 }
 function nextEnemMusic() {
@@ -351,12 +385,6 @@ function renderMedalsStatus(showAll = false) {
   });
   html += `</div>`;
   document.getElementById('enem-music-medals').innerHTML = html;
-}
-function getExplicacao(topicIdx, qIdx, resposta, correctIdx) {
-  if (enemMusicExplicacoes[topicIdx] && enemMusicExplicacoes[topicIdx][qIdx]) {
-    return enemMusicExplicacoes[topicIdx][qIdx];
-  }
-  return "Veja a explicação do tópico para entender melhor!";
 }
 
 // Inicialização segura

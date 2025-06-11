@@ -165,11 +165,7 @@
 </head>
 <body>
 <div class="c1-ex-container">
-  <div class="c1-navbar">
-    <!-- <a href="/exercicios" class="c1-back-button">
-      <i class="fas fa-arrow-left" style="margin-right: 8px;"></i> Voltar ao Menu
-    </a> -->
-  </div>
+  <div class="c1-navbar"></div>
   <div class="c1-title">
     <i class="fa-solid fa-arrow-up-right-dots"></i>
     Exercícios Interativos – Nível C1
@@ -177,106 +173,102 @@
   <div id="c1-medals"></div>
   <div id="c1-root"></div>
 </div>
-<!-- Integração automática do placar e medalhas -->
 <script src="/static/js/medalhas.js"></script>
 <script>
-// ====== COLE SUAS QUESTÕES LOGO ABAIXO ======
+// ====== QUESTÕES C1 COM EXPLICAÇÃO EMBUTIDA PROFISSIONAL ======
 const c1Topics = [
   {
     icon: "fa-exchange-alt", color: "#8e24aa", title: "Inversion with conditionals", questions: [
-      { q: "___ I known about the meeting, I would have attended.", a: ["Had", "If", "Have"], correct: 0 },
-      { q: "___ you need any help, let me know.", a: ["Should", "If", "Would"], correct: 0 }
+      { q: "___ I known about the meeting, I would have attended.", a: ["Had", "If", "Have"], correct: 0, explicacao: "Had: Correto. Inversão condicional: 'Had I known' equivale a 'If I had known'." },
+      { q: "___ you need any help, let me know.", a: ["Should", "If", "Would"], correct: 0, explicacao: "Should: Correto. Inversão condicional: 'Should you need' = 'If you need'." }
     ]
   },
   {
     icon: "fa-random", color: "#6d4c41", title: "Mixed tenses in context", questions: [
-      { q: "By the time she ___ (arrive), we ___ (already/leave).", a: ["arrived / had already left", "arrives / have already left", "was arriving / already left"], correct: 0 },
-      { q: "He ___ (live) in London before he ___ (move) to Paris.", a: ["had lived / moved", "lived / had moved", "has lived / moves"], correct: 0 }
+      { q: "By the time she ___ (arrive), we ___ (already/leave).", a: ["arrived / had already left", "arrives / have already left", "was arriving / already left"], correct: 0, explicacao: "arrived / had already left: Correto. Sequência passada: passado simples seguido de past perfect." },
+      { q: "He ___ (live) in London before he ___ (move) to Paris.", a: ["had lived / moved", "lived / had moved", "has lived / moves"], correct: 0, explicacao: "had lived / moved: Correto. Past perfect para o que veio antes." }
     ]
   },
   {
     icon: "fa-bullhorn", color: "#3949ab", title: "Emphatic structures", questions: [
-      { q: "___ I need is a good night's sleep.", a: ["What", "That", "Which"], correct: 0 },
-      { q: "The thing ___ annoys me is the noise.", a: ["that", "who", "what"], correct: 0 }
+      { q: "___ I need is a good night's sleep.", a: ["What", "That", "Which"], correct: 0, explicacao: "What: Correto. Estrutura enfática 'What I need...'" },
+      { q: "The thing ___ annoys me is the noise.", a: ["that", "who", "what"], correct: 0, explicacao: "that: Correto. 'That' para definir coisas." }
     ]
   },
   {
     icon: "fa-pen-fancy", color: "#26a69a", title: "Nominalisation", questions: [
-      { q: "___ of the report was time-consuming.", a: ["The writing", "To write", "Writing"], correct: 0 },
-      { q: "___ is important for improvement.", a: ["Revision", "Revise", "Revising"], correct: 0 }
+      { q: "___ of the report was time-consuming.", a: ["The writing", "To write", "Writing"], correct: 0, explicacao: "The writing: Correto. Nominalização com 'the + -ing'." },
+      { q: "___ is important for improvement.", a: ["Revision", "Revise", "Revising"], correct: 0, explicacao: "Revision: Correto. Substantivo para 'revisar'." }
     ]
   },
   {
     icon: "fa-project-diagram", color: "#43a047", title: "Discourse markers", questions: [
-      { q: "He was tired. ___, he kept working.", a: ["Nevertheless", "Because", "Therefore"], correct: 0 },
-      { q: "She didn’t like the food. ___, she ate everything.", a: ["However", "Although", "Moreover"], correct: 0 }
+      { q: "He was tired. ___, he kept working.", a: ["Nevertheless", "Because", "Therefore"], correct: 0, explicacao: "Nevertheless: Correto. Contraste entre frases." },
+      { q: "She didn’t like the food. ___, she ate everything.", a: ["However", "Although", "Moreover"], correct: 0, explicacao: "However: Correto. Contraste/adversidade." }
     ]
   },
   {
     icon: "fa-code-branch", color: "#7e57c2", title: "Advanced linkers", questions: [
-      { q: "Not only is he smart, ___ he is also very funny.", a: ["but also", "and", "or"], correct: 0 },
-      { q: "You can borrow my car ___ you drive carefully.", a: ["as long as", "even though", "unless"], correct: 0 }
+      { q: "Not only is he smart, ___ he is also very funny.", a: ["but also", "and", "or"], correct: 0, explicacao: "but also: Correto. Estrutura 'not only... but also...'." },
+      { q: "You can borrow my car ___ you drive carefully.", a: ["as long as", "even though", "unless"], correct: 0, explicacao: "as long as: Correto. Condição positiva." }
     ]
   },
   {
     icon: "fa-brain", color: "#fbc02d", title: "Idiomatic expressions", questions: [
-      { q: "That test was ___; I finished it in 10 minutes.", a: ["a piece of cake", "to break the ice", "under the weather"], correct: 0 },
-      { q: "He told a joke to ___ at the meeting.", a: ["break the ice", "spill the beans", "hit the sack"], correct: 0 }
+      { q: "That test was ___; I finished it in 10 minutes.", a: ["a piece of cake", "to break the ice", "under the weather"], correct: 0, explicacao: "a piece of cake: Correto. Expressão para 'muito fácil'." },
+      { q: "He told a joke to ___ at the meeting.", a: ["break the ice", "spill the beans", "hit the sack"], correct: 0, explicacao: "break the ice: Correto. Tornar o ambiente mais descontraído." }
     ]
   },
   {
     icon: "fa-gavel", color: "#e65100", title: "Subjunctive", questions: [
-      { q: "If I ___ you, I would talk to her.", a: ["were", "was", "am"], correct: 0 },
-      { q: "It's essential that he ___ present.", a: ["be", "is", "was"], correct: 0 }
+      { q: "If I ___ you, I would talk to her.", a: ["were", "was", "am"], correct: 0, explicacao: "were: Correto. Subjuntivo após 'If I...'" },
+      { q: "It's essential that he ___ present.", a: ["be", "is", "was"], correct: 0, explicacao: "be: Correto. Subjuntivo após 'It's essential that...'" }
     ]
   },
   {
     icon: "fa-balance-scale", color: "#009688", title: "Formal vs. informal structures", questions: [
-      { q: "___ you require assistance, please contact us. (formal)", a: ["Should", "If", "Would"], correct: 0 },
-      { q: "___ you want to come, just let me know. (informal)", a: ["If", "Should", "Would"], correct: 0 }
+      { q: "___ you require assistance, please contact us. (formal)", a: ["Should", "If", "Would"], correct: 0, explicacao: "Should: Correto. Estrutura formal: 'Should you...'" },
+      { q: "___ you want to come, just let me know. (informal)", a: ["If", "Should", "Would"], correct: 0, explicacao: "If: Correto. Estrutura informal." }
     ]
   },
   {
     icon: "fa-history", color: "#cddc39", title: "Modality in past", questions: [
-      { q: "You ___ (do) that; it was dangerous.", a: ["shouldn't have done", "ought not have done", "might not have done"], correct: 0 },
-      { q: "She ___ (tell) the truth, but she didn't.", a: ["ought to have told", "should have tell", "should have tells"], correct: 0 }
+      { q: "You ___ (do) that; it was dangerous.", a: ["shouldn't have done", "ought not have done", "might not have done"], correct: 0, explicacao: "shouldn't have done: Correto. Modalidade passada para reprovação." },
+      { q: "She ___ (tell) the truth, but she didn't.", a: ["ought to have told", "should have tell", "should have tells"], correct: 0, explicacao: "ought to have told: Correto. Modalidade para obrigação não cumprida." }
     ]
   },
   {
     icon: "fa-quote-right", color: "#ff7043", title: "Advanced reported speech", questions: [
-      { q: "He said, 'I will call you tomorrow.' → He said that he ___ call me the next day.", a: ["would", "will", "can"], correct: 0 },
-      { q: "She said, 'I saw him yesterday.' → She said she ___ him the day before.", a: ["had seen", "has seen", "saw"], correct: 0 }
+      { q: "He said, 'I will call you tomorrow.' → He said that he ___ call me the next day.", a: ["would", "will", "can"], correct: 0, explicacao: "would: Correto. will → would no reported speech." },
+      { q: "She said, 'I saw him yesterday.' → She said she ___ him the day before.", a: ["had seen", "has seen", "saw"], correct: 0, explicacao: "had seen: Correto. saw → had seen no reported speech." }
     ]
   },
   {
     icon: "fa-hand-holding-heart", color: "#8d6e63", title: "Hedging and softening language", questions: [
-      { q: "___, the situation seems to be improving.", a: ["Apparently", "Obviously", "Certainly"], correct: 0 },
-      { q: "It ___ that the results are positive.", a: ["seems", "shows", "proves"], correct: 0 }
+      { q: "___, the situation seems to be improving.", a: ["Apparently", "Obviously", "Certainly"], correct: 0, explicacao: "Apparently: Correto. Expressa incerteza/hedge." },
+      { q: "It ___ that the results are positive.", a: ["seems", "shows", "proves"], correct: 0, explicacao: "seems: Correto. 'It seems that...' é linguagem suavizadora." }
     ]
   },
   {
     icon: "fa-user-edit", color: "#5d4037", title: "Reduced relative clauses", questions: [
-      { q: "The man ___ to her is my uncle.", a: ["talking", "who talks", "talks"], correct: 0 },
-      { q: "The books ___ on the table are mine.", a: ["lying", "which lie", "lies"], correct: 0 }
+      { q: "The man ___ to her is my uncle.", a: ["talking", "who talks", "talks"], correct: 0, explicacao: "talking: Correto. Reduced relative clause ('who is talking' → 'talking')." },
+      { q: "The books ___ on the table are mine.", a: ["lying", "which lie", "lies"], correct: 0, explicacao: "lying: Correto. Reduced relative clause ('which are lying' → 'lying')." }
     ]
   },
   {
     icon: "fa-user-shield", color: "#607d8b", title: "Complex passive structures", questions: [
-      { q: "He is ___ to have committed the crime.", a: ["said", "told", "say"], correct: 0 },
-      { q: "The project ___ to be completed by next month.", a: ["is expected", "expects", "expected"], correct: 0 }
+      { q: "He is ___ to have committed the crime.", a: ["said", "told", "say"], correct: 0, explicacao: "said: Correto. Estrutura passiva: 'is said to have...'" },
+      { q: "The project ___ to be completed by next month.", a: ["is expected", "expects", "expected"], correct: 0, explicacao: "is expected: Correto. Passiva complexa." }
     ]
   },
   {
     icon: "fa-random", color: "#00bcd4", title: "Advanced conditionals", questions: [
-      { q: "___ you study hard, you will not pass.", a: ["Unless", "If", "Provided that"], correct: 0 },
-      { q: "You can go out ___ you finish your homework.", a: ["provided that", "unless", "as if"], correct: 0 }
+      { q: "___ you study hard, you will not pass.", a: ["Unless", "If", "Provided that"], correct: 0, explicacao: "Unless: Correto. 'Unless' para 'a não ser que'." },
+      { q: "You can go out ___ you finish your homework.", a: ["provided that", "unless", "as if"], correct: 0, explicacao: "provided that: Correto. Condição positiva." }
     ]
   }
 ];
 
-const explicacoesC1 = c1Topics.map(topic => topic.questions.map(() => [
-  "Veja a explicação do tópico para entender melhor!"
-]));
 const medalTypes = [
   { name: "Ouro", icon: "fa-medal", class: "c1-medal-gold", emoji: "🥇" },
   { name: "Prata", icon: "fa-medal", class: "c1-medal-silver", emoji: "🥈" },
@@ -371,8 +363,6 @@ function checkC1(val) {
     medalObj.medalha = medalByAttempts(medalObj.tentativas);
     showGabarito(medalObj, t, q, qidx);
     renderMedalsStatus();
-
-    // REGISTRA MEDALHA E AVISA O MENU PRINCIPAL
     if (typeof premiarMedalha === "function") {
       premiarMedalha("C1", qidx + 1, medalTypes[medalObj.medalha].name.toLowerCase());
     }
@@ -385,7 +375,7 @@ function checkC1(val) {
     });
     document.getElementById('c1-feedback').innerHTML =
       `<span style="color:#e53935;"><i class="fa-solid fa-circle-xmark"></i> Errou!</span>
-       <div class="c1-explanation">${getExplicacaoC1(currentTopic, currentQ)}</div>`;
+       <div class="c1-explanation">${q.explicacao}</div>`;
   }
 }
 function showGabarito(medalObj, t, q, qidx) {
@@ -405,7 +395,8 @@ function showGabarito(medalObj, t, q, qidx) {
     else
       medalTxt = `🥉 <b>Bronze conquistada!</b>`;
   }
-  fb.innerHTML = `<span style="color:#43a047;"><i class="fa-solid fa-circle-check"></i> Correto!</span> ${medalTxt}`;
+  fb.innerHTML = `<span style="color:#43a047;"><i class="fa-solid fa-circle-check"></i> Correto!</span> ${medalTxt}
+    <div class="c1-explanation">${q.explicacao}</div>`;
   document.getElementById('c1-next-btn').style.display = "inline-block";
 }
 function nextC1() {
@@ -472,15 +463,6 @@ function renderMedalsStatus(showAll = false) {
   });
   html += `</div>`;
   document.getElementById('c1-medals').innerHTML = html;
-}
-function getExplicacaoC1(topicIdx, qIdx) {
-  if (explicacoesC1[topicIdx] && explicacoesC1[topicIdx][qIdx]) {
-    const arr = explicacoesC1[topicIdx][qIdx];
-    if (arr) {
-      return arr[0] || "Confira a explicação do tópico.";
-    }
-  }
-  return "Confira a explicação do tópico.";
 }
 function medalIconHtml(idx) {
   if (idx === 0) return `<span class="c1-medal c1-medal-gold"><i class="fa-solid fa-medal"></i></span>`;

@@ -165,11 +165,7 @@
 </head>
 <body>
 <div class="b1-ex-container">
-  <div class="b1-navbar">
-    <!-- <a href="/exercicios" class="b1-back-button">
-      <i class="fas fa-arrow-left" style="margin-right: 8px;"></i> Voltar ao Menu
-    </a> -->
-  </div>
+  <div class="b1-navbar"></div>
   <div class="b1-title">
     <i class="fa-solid fa-arrow-up-right-dots"></i>
     Exercícios Interativos – Nível B1
@@ -177,106 +173,101 @@
   <div id="b1-medals"></div>
   <div id="b1-root"></div>
 </div>
-<!-- Integração automática do placar e medalhas -->
 <script src="/static/js/medalhas.js"></script>
 <script>
-// ====== COLE SUAS QUESTÕES LOGO ABAIXO ======
 const b1Topics = [
   {
     icon: "fa-clock-check", color: "#ff9800", title: "Present perfect (just, already, yet, ever, never)", questions: [
-      { q: "I ___ just ___ the dishes, so the kitchen is clean now.", a: ["have / washed", "has / washed", "have / washing"], correct: 0 },
-      { q: "She ___ never ___ to Japan before this trip.", a: ["has / been", "have / been", "has / went"], correct: 0 }
+      { q: "I ___ just ___ the dishes, so the kitchen is clean now.", a: ["have / washed", "has / washed", "have / washing"], correct: 0, explicacao: "have / washed: Correto. 'Have' para I/you/we/they + 'washed' (particípio passado)." },
+      { q: "She ___ never ___ to Japan before this trip.", a: ["has / been", "have / been", "has / went"], correct: 0, explicacao: "has / been: Correto. 'Has' para she/he/it + 'been' (particípio passado de 'be')." }
     ]
   },
   {
     icon: "fa-clock-rotate-left", color: "#f57c00", title: "Present perfect vs. simple past", questions: [
-      { q: "I ___ (visit) Paris three times in my life.", a: ["visited", "have visited", "have visit"], correct: 1 },
-      { q: "She ___ (see) this movie last weekend.", a: ["has seen", "saw", "has saw"], correct: 1 }
+      { q: "I ___ (visit) Paris three times in my life.", a: ["visited", "have visited", "have visit"], correct: 1, explicacao: "have visited: Correto. 'Have/has' + particípio para experiências de vida (sem tempo definido)." },
+      { q: "She ___ (see) this movie last weekend.", a: ["has seen", "saw", "has saw"], correct: 1, explicacao: "saw: Correto. Simple past para ações com tempo definido ('last weekend')." }
     ]
   },
   {
     icon: "fa-code-branch", color: "#e65100", title: "First conditional (If + present, will...)", questions: [
-      { q: "If it ___ tomorrow, we ___ stay at home.", a: ["rains / will", "will rain / will", "rains / would"], correct: 0 },
-      { q: "She ___ help you if she ___ time.", a: ["will / has", "would / has", "will / have"], correct: 0 }
+      { q: "If it ___ tomorrow, we ___ stay at home.", a: ["rains / will", "will rain / will", "rains / would"], correct: 0, explicacao: "rains / will: Correto. If + presente, will + verbo." },
+      { q: "She ___ help you if she ___ time.", a: ["will / has", "would / has", "will / have"], correct: 0, explicacao: "will / has: Correto. If + presente, will + verbo." }
     ]
   },
   {
     icon: "fa-wand-magic-sparkles", color: "#3f51b5", title: "Modal verbs (must, might, may, should, have to...)", questions: [
-      { q: "You ___ wear a seatbelt when driving; it's the law.", a: ["should", "must", "may"], correct: 1 },
-      { q: "I ___ be late for the meeting, but I'm not sure yet.", a: ["must", "might", "have to"], correct: 1 }
+      { q: "You ___ wear a seatbelt when driving; it's the law.", a: ["should", "must", "may"], correct: 1, explicacao: "must: Correto. Obrigação/lei." },
+      { q: "I ___ be late for the meeting, but I'm not sure yet.", a: ["must", "might", "have to"], correct: 1, explicacao: "might: Correto. Possibilidade no futuro." }
     ]
   },
   {
     icon: "fa-user-group", color: "#673ab7", title: "Reflexive pronouns (myself, herself...)", questions: [
-      { q: "She made that cake ___, without any help.", a: ["herself", "himself", "itself"], correct: 0 },
-      { q: "They can take care of ___.", a: ["themself", "themselves", "them"], correct: 1 }
+      { q: "She made that cake ___, without any help.", a: ["herself", "himself", "itself"], correct: 0, explicacao: "herself: Correto. Pronome reflexivo para 'she'." },
+      { q: "They can take care of ___.", a: ["themself", "themselves", "them"], correct: 1, explicacao: "themselves: Correto. Reflexivo plural para 'they'." }
     ]
   },
   {
     icon: "fa-backward-step", color: "#9c27b0", title: "Used to (hábitos no passado)", questions: [
-      { q: "I ___ a lot of coffee, but now I prefer tea.", a: ["used to drink", "use to drink", "used drink"], correct: 0 },
-      { q: "He ___ in London before moving to Paris.", a: ["used lived", "was used to live", "used to live"], correct: 2 }
+      { q: "I ___ a lot of coffee, but now I prefer tea.", a: ["used to drink", "use to drink", "used drink"], correct: 0, explicacao: "used to drink: Correto. Expressa hábito passado." },
+      { q: "He ___ in London before moving to Paris.", a: ["used lived", "was used to live", "used to live"], correct: 2, explicacao: "used to live: Correto. Estrutura 'used to + verbo' para hábitos antigos." }
     ]
   },
   {
     icon: "fa-person-running", color: "#03a9f4", title: "Gerunds and infinitives (love doing / want to do)", questions: [
-      { q: "I enjoy ___ foreign languages.", a: ["learn", "to learn", "learning"], correct: 2 },
-      { q: "She wants ___ a doctor when she grows up.", a: ["becoming", "to become", "become"], correct: 1 }
+      { q: "I enjoy ___ foreign languages.", a: ["learn", "to learn", "learning"], correct: 2, explicacao: "learning: Correto. Após enjoy, usamos verbo + ing." },
+      { q: "She wants ___ a doctor when she grows up.", a: ["becoming", "to become", "become"], correct: 1, explicacao: "to become: Correto. Após want, usamos to + verbo." }
     ]
   },
   {
     icon: "fa-comments", color: "#00bcd4", title: "Reported speech (basic statements)", questions: [
-      { q: "He said, 'I am tired.' → He said that he ___ tired.", a: ["is", "was", "were"], correct: 1 },
-      { q: "She said, 'I will call you.' → She said that she ___ call me.", a: ["will", "would", "is going to"], correct: 1 }
+      { q: "He said, 'I am tired.' → He said that he ___ tired.", a: ["is", "was", "were"], correct: 1, explicacao: "was: Correto. Reported speech: am → was." },
+      { q: "She said, 'I will call you.' → She said that she ___ call me.", a: ["will", "would", "is going to"], correct: 1, explicacao: "would: Correto. will → would no reported speech." }
     ]
   },
   {
     icon: "fa-tags", color: "#009688", title: "Question tags", questions: [
-      { q: "You like chocolate, ___?", a: ["don't you", "aren't you", "do you"], correct: 0 },
-      { q: "They weren't at the party, ___?", a: ["weren't they", "were they", "didn't they"], correct: 1 }
+      { q: "You like chocolate, ___?", a: ["don't you", "aren't you", "do you"], correct: 0, explicacao: "don't you: Correto. Tag negativa após frase afirmativa." },
+      { q: "They weren't at the party, ___?", a: ["weren't they", "were they", "didn't they"], correct: 1, explicacao: "were they: Correto. Tag afirmativa após frase negativa." }
     ]
   },
   {
     icon: "fa-sitemap", color: "#4caf50", title: "Relative clauses (who, which, that)", questions: [
-      { q: "The woman ___ works at the bank is my neighbor.", a: ["which", "who", "whose"], correct: 1 },
-      { q: "The book ___ I borrowed from you is very interesting.", a: ["who", "whom", "that"], correct: 2 }
+      { q: "The woman ___ works at the bank is my neighbor.", a: ["which", "who", "whose"], correct: 1, explicacao: "who: Correto. Para pessoas, usamos 'who'." },
+      { q: "The book ___ I borrowed from you is very interesting.", a: ["who", "whom", "that"], correct: 2, explicacao: "that: Correto. Para coisas, usamos 'that' ou 'which'." }
     ]
   },
   {
     icon: "fa-rotate", color: "#cddc39", title: "Passive voice (present & past)", questions: [
-      { q: "This building ___ by a famous architect in 1982.", a: ["was designed", "designed", "is designed"], correct: 0 },
-      { q: "English ___ in many countries around the world.", a: ["speaks", "is spoken", "spoken"], correct: 1 }
+      { q: "This building ___ by a famous architect in 1982.", a: ["was designed", "designed", "is designed"], correct: 0, explicacao: "was designed: Correto. Passado: was/were + particípio." },
+      { q: "English ___ in many countries around the world.", a: ["speaks", "is spoken", "spoken"], correct: 1, explicacao: "is spoken: Correto. Presente: is/are + particípio." }
     ]
   },
   {
     icon: "fa-code-branch", color: "#ffc107", title: "Second conditional", questions: [
-      { q: "If I ___ rich, I ___ a big house by the sea.", a: ["am / would buy", "was / will buy", "were / would buy"], correct: 2 },
-      { q: "What ___ if you ___ more free time?", a: ["would you do / had", "will you do / have", "did you do / had"], correct: 0 }
+      { q: "If I ___ rich, I ___ a big house by the sea.", a: ["am / would buy", "was / will buy", "were / would buy"], correct: 2, explicacao: "were / would buy: Correto. If + passado, would + verbo." },
+      { q: "What ___ if you ___ more free time?", a: ["would you do / had", "will you do / have", "did you do / had"], correct: 0, explicacao: "would you do / had: Correto. Estrutura do 2º condicional." }
     ]
   },
   {
     icon: "fa-arrow-down-a-z", color: "#ff5722", title: "Adjective order (a big red car)", questions: [
-      { q: "She bought a ___ jacket yesterday.", a: ["leather new black", "new black leather", "black new leather"], correct: 1 },
-      { q: "They live in a ___ house in the countryside.", a: ["modern large beautiful", "beautiful large modern", "large beautiful modern"], correct: 2 }
+      { q: "She bought a ___ jacket yesterday.", a: ["leather new black", "new black leather", "black new leather"], correct: 1, explicacao: "new black leather: Correto. Ordem: opinião, tamanho, cor, material." },
+      { q: "They live in a ___ house in the countryside.", a: ["modern large beautiful", "beautiful large modern", "large beautiful modern"], correct: 2, explicacao: "large beautiful modern: Correto. Ordem: tamanho, opinião, tipo/material." }
     ]
   },
   {
     icon: "fa-equals", color: "#8d6e63", title: "Zero conditional", questions: [
-      { q: "If you ___ water to 100°C, it ___.", a: ["heat / boils", "will heat / boils", "heat / will boil"], correct: 0 },
-      { q: "Ice ___ if you ___ it to room temperature.", a: ["melts / expose", "will melt / exposed", "melts / exposed"], correct: 0 }
+      { q: "If you ___ water to 100°C, it ___.", a: ["heat / boils", "will heat / boils", "heat / will boil"], correct: 0, explicacao: "heat / boils: Correto. Zero condicional: if + presente, presente." },
+      { q: "Ice ___ if you ___ it to room temperature.", a: ["melts / expose", "will melt / exposed", "melts / exposed"], correct: 0, explicacao: "melts / expose: Correto. Zero condicional: fatos gerais." }
     ]
   },
   {
     icon: "fa-diagram-project", color: "#607d8b", title: "Phrasal verbs (look for, give up...)", questions: [
-      { q: "I need to ___ this information online.", a: ["look for", "look at", "look after"], correct: 0 },
-      { q: "Please don't ___ learning English. It takes time, but you'll improve.", a: ["give away", "give up", "give in"], correct: 1 }
+      { q: "I need to ___ this information online.", a: ["look for", "look at", "look after"], correct: 0, explicacao: "look for: Correto. Procurar." },
+      { q: "Please don't ___ learning English. It takes time, but you'll improve.", a: ["give away", "give up", "give in"], correct: 1, explicacao: "give up: Correto. Não desistir." }
     ]
   }
 ];
 
-const explicacoesB1 = b1Topics.map(topic => topic.questions.map(() => [
-  "Veja a explicação do tópico para entender melhor!"
-]));
 const medalTypes = [
   { name: "Ouro", icon: "fa-medal", class: "b1-medal-gold", emoji: "🥇" },
   { name: "Prata", icon: "fa-medal", class: "b1-medal-silver", emoji: "🥈" },
@@ -371,8 +362,6 @@ function checkB1(val) {
     medalObj.medalha = medalByAttempts(medalObj.tentativas);
     showGabarito(medalObj, t, q, qidx);
     renderMedalsStatus();
-
-    // REGISTRA MEDALHA E AVISA O MENU PRINCIPAL
     if (typeof premiarMedalha === "function") {
       premiarMedalha("B1", qidx + 1, medalTypes[medalObj.medalha].name.toLowerCase());
     }
@@ -385,7 +374,7 @@ function checkB1(val) {
     });
     document.getElementById('b1-feedback').innerHTML =
       `<span style="color:#e53935;"><i class="fa-solid fa-circle-xmark"></i> Errou!</span>
-       <div class="b1-explanation">${getExplicacaoB1(currentTopic, currentQ)}</div>`;
+       <div class="b1-explanation">${q.explicacao}</div>`;
   }
 }
 function showGabarito(medalObj, t, q, qidx) {
@@ -405,7 +394,8 @@ function showGabarito(medalObj, t, q, qidx) {
     else
       medalTxt = `🥉 <b>Bronze conquistada!</b>`;
   }
-  fb.innerHTML = `<span style="color:#43a047;"><i class="fa-solid fa-circle-check"></i> Correto!</span> ${medalTxt}`;
+  fb.innerHTML = `<span style="color:#43a047;"><i class="fa-solid fa-circle-check"></i> Correto!</span> ${medalTxt}
+    <div class="b1-explanation">${q.explicacao}</div>`;
   document.getElementById('b1-next-btn').style.display = "inline-block";
 }
 function nextB1() {
@@ -473,21 +463,11 @@ function renderMedalsStatus(showAll = false) {
   html += `</div>`;
   document.getElementById('b1-medals').innerHTML = html;
 }
-function getExplicacaoB1(topicIdx, qIdx) {
-  if (explicacoesB1[topicIdx] && explicacoesB1[topicIdx][qIdx]) {
-    const arr = explicacoesB1[topicIdx][qIdx];
-    if (arr) {
-      return arr[0] || "Confira a explicação do tópico.";
-    }
-  }
-  return "Confira a explicação do tópico.";
-}
 function medalIconHtml(idx) {
   if (idx === 0) return `<span class="b1-medal b1-medal-gold"><i class="fa-solid fa-medal"></i></span>`;
   if (idx === 1) return `<span class="b1-medal b1-medal-silver"><i class="fa-solid fa-medal"></i></span>`;
   return `<span class="b1-medal b1-medal-bronze"><i class="fa-solid fa-medal"></i></span>`;
 }
-// Inicialização profissional e segura
 inicializaQuestoes();
 renderB1Exercise();
 </script>

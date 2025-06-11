@@ -165,11 +165,7 @@
 </head>
 <body>
 <div class="c2-ex-container">
-  <div class="c2-navbar">
-    <!-- <a href="/exercicios" class="c2-back-button">
-      <i class="fas fa-arrow-left" style="margin-right: 8px;"></i> Voltar ao Menu
-    </a> -->
-  </div>
+  <div class="c2-navbar"></div>
   <div class="c2-title">
     <i class="fa-solid fa-earth-europe"></i>
     Exercícios Interativos – Nível C2
@@ -177,106 +173,101 @@
   <div id="c2-medals"></div>
   <div id="c2-root"></div>
 </div>
-<!-- Integração automática do placar e medalhas -->
 <script src="/static/js/medalhas.js"></script>
 <script>
-// ====== COLE SUAS QUESTÕES LOGO ABAIXO ======
 const c2Topics = [
   {
     icon: "fa-code-branch", color: "#37474f", title: "All conditional forms flexibly used", questions: [
-      { q: "___ you see her, tell her I called. (Any condition)", a: ["Should", "If", "Would"], correct: 0 },
-      { q: "Had he known the answer, he ___ (not/make) that mistake.", a: ["wouldn't have made", "didn't make", "wouldn't make"], correct: 0 }
+      { q: "___ you see her, tell her I called. (Any condition)", a: ["Should", "If", "Would"], correct: 0, explicacao: "Should: Correto. 'Should you...' é usado para condições formais, equivalente a 'If you see her...'." },
+      { q: "Had he known the answer, he ___ (not/make) that mistake.", a: ["wouldn't have made", "didn't make", "wouldn't make"], correct: 0, explicacao: "wouldn't have made: Correto. 'Had he known...' é equivalente a 'If he had known...' no terceiro condicional." }
     ]
   },
   {
     icon: "fa-ellipsis", color: "#546e7a", title: "Advanced ellipsis and substitution in conversation", questions: [
-      { q: "She likes jazz and so ___ I.", a: ["do", "am", "did"], correct: 0 },
-      { q: "He hasn't finished, but I ___.", a: ["have", "had", "did"], correct: 0 }
+      { q: "She likes jazz and so ___ I.", a: ["do", "am", "did"], correct: 0, explicacao: "do: Correto. 'So do I' = eu também." },
+      { q: "He hasn't finished, but I ___.", a: ["have", "had", "did"], correct: 0, explicacao: "have: Correto. Ellipsis do present perfect." }
     ]
   },
   {
     icon: "fa-layer-group", color: "#fbc02d", title: "Nominal, adverbial and participle clauses", questions: [
-      { q: "___ he was tired, he kept working. (Adverbial clause)", a: ["Although", "Because", "Despite"], correct: 0 },
-      { q: "___ by her answer, he smiled. (Participle clause)", a: ["Surprised", "Surprising", "To surprise"], correct: 0 }
+      { q: "___ he was tired, he kept working. (Adverbial clause)", a: ["Although", "Because", "Despite"], correct: 0, explicacao: "Although: Correto. Introduz uma oração adverbial de contraste." },
+      { q: "___ by her answer, he smiled. (Participle clause)", a: ["Surprised", "Surprising", "To surprise"], correct: 0, explicacao: "Surprised: Correto. Participle clause descrevendo o sujeito." }
     ]
   },
   {
     icon: "fa-masks-theater", color: "#8e24aa", title: "Idiomatic and metaphorical language fluently used", questions: [
-      { q: "He finally ___ the bullet and told the truth.", a: ["bit", "bites", "has bitten"], correct: 0 },
-      { q: "She’s feeling under the ___.", a: ["weather", "cloud", "moon"], correct: 0 }
+      { q: "He finally ___ the bullet and told the truth.", a: ["bit", "bites", "has bitten"], correct: 0, explicacao: "bit: Correto. 'Bite the bullet' = enfrentar uma situação difícil." },
+      { q: "She’s feeling under the ___.", a: ["weather", "cloud", "moon"], correct: 0, explicacao: "weather: Correto. 'Under the weather' = não se sentir bem." }
     ]
   },
   {
     icon: "fa-comments", color: "#039be5", title: "Complex discourse strategies", questions: [
-      { q: "\"That may be true, ___ I still believe my point stands.\" (conceding)", a: ["but", "because", "so"], correct: 0 },
-      { q: "\"Let me ___ what we've discussed so far.\" (summarizing)", a: ["summarize", "refute", "concede"], correct: 0 }
+      { q: "\"That may be true, ___ I still believe my point stands.\" (conceding)", a: ["but", "because", "so"], correct: 0, explicacao: "but: Correto. Marcador de contraste/concessão." },
+      { q: "\"Let me ___ what we've discussed so far.\" (summarizing)", a: ["summarize", "refute", "concede"], correct: 0, explicacao: "summarize: Correto. Usado para retomar/sintetizar argumentos." }
     ]
   },
   {
     icon: "fa-question-circle", color: "#607d8b", title: "Embedded questions and structures", questions: [
-      { q: "I wonder ___ she will arrive.", a: ["when", "that", "if"], correct: 0 },
-      { q: "Can you tell me ___ the station is?", a: ["where", "what", "how"], correct: 0 }
+      { q: "I wonder ___ she will arrive.", a: ["when", "that", "if"], correct: 0, explicacao: "when: Correto. Pergunta indireta 'I wonder when...'" },
+      { q: "Can you tell me ___ the station is?", a: ["where", "what", "how"], correct: 0, explicacao: "where: Correto. Pergunta indireta 'Can you tell me where...'" }
     ]
   },
   {
     icon: "fa-brain", color: "#00bcd4", title: "Abstract language and precision in tone/register", questions: [
-      { q: "His explanation lacked ___.", a: ["clarity", "clear", "clarify"], correct: 0 },
-      { q: "Her response was ___ ambiguous.", a: ["deliberately", "deliberate", "deliberation"], correct: 0 }
+      { q: "His explanation lacked ___.", a: ["clarity", "clear", "clarify"], correct: 0, explicacao: "clarity: Correto. Substantivo abstrato." },
+      { q: "Her response was ___ ambiguous.", a: ["deliberately", "deliberate", "deliberation"], correct: 0, explicacao: "deliberately: Correto. Advérbio de modo." }
     ]
   },
   {
     icon: "fa-users-cog", color: "#6d4c41", title: "Mastery of register shift", questions: [
-      { q: "Could you ___ me a hand? (formal request)", a: ["give", "lend", "send"], correct: 1 },
-      { q: "___, mate! (informal greeting)", a: ["Cheers", "Greetings", "Salutations"], correct: 0 }
+      { q: "Could you ___ me a hand? (formal request)", a: ["give", "lend", "send"], correct: 1, explicacao: "lend: Correto. 'Lend a hand' é mais formal do que 'give a hand'." },
+      { q: "___, mate! (informal greeting)", a: ["Cheers", "Greetings", "Salutations"], correct: 0, explicacao: "Cheers: Correto. Saudação informal britânica." }
     ]
   },
   {
     icon: "fa-random", color: "#43a047", title: "Syntactic flexibility", questions: [
-      { q: "___ did I expect her to win the competition.", a: ["Little", "Very", "Many"], correct: 0 },
-      { q: "Gone ___ the days when we used to travel every summer.", a: ["are", "is", "were"], correct: 0 }
+      { q: "___ did I expect her to win the competition.", a: ["Little", "Very", "Many"], correct: 0, explicacao: "Little: Correto. Inversão para ênfase negativa." },
+      { q: "Gone ___ the days when we used to travel every summer.", a: ["are", "is", "were"], correct: 0, explicacao: "are: Correto. Estrutura invertida: 'Gone are the days...'" }
     ]
   },
   {
     icon: "fa-sync", color: "#f57c00", title: "Paraphrasing and reformulation strategies", questions: [
-      { q: "In other ___, he was late.", a: ["words", "sentences", "terms"], correct: 0 },
-      { q: "To ___ it another way, she disagreed.", a: ["put", "say", "write"], correct: 0 }
+      { q: "In other ___, he was late.", a: ["words", "sentences", "terms"], correct: 0, explicacao: "words: Correto. 'In other words' para parafrasear." },
+      { q: "To ___ it another way, she disagreed.", a: ["put", "say", "write"], correct: 0, explicacao: "put: Correto. 'To put it another way' = reformular/parafrasear." }
     ]
   },
   {
     icon: "fa-bolt", color: "#cddc39", title: "Intensifiers and downtoners", questions: [
-      { q: "She was ___ exhausted after the marathon.", a: ["absolutely", "quite", "hardly"], correct: 0 },
-      { q: "He ___ noticed the sign on the door.", a: ["barely", "totally", "fully"], correct: 0 }
+      { q: "She was ___ exhausted after the marathon.", a: ["absolutely", "quite", "hardly"], correct: 0, explicacao: "absolutely: Correto. Intensificador absoluto para adjetivos extremos." },
+      { q: "He ___ noticed the sign on the door.", a: ["barely", "totally", "fully"], correct: 0, explicacao: "barely: Correto. Downtoner: quase não percebeu." }
     ]
   },
   {
     icon: "fa-cubes", color: "#00796b", title: "Word formation mastery", questions: [
-      { q: "The ___ of the system is crucial. (operate)", a: ["operation", "operator", "operational"], correct: 0 },
-      { q: "He is a ___ reader. (enthusiasm)", a: ["enthusiastic", "enthuse", "enthusiasm"], correct: 0 }
+      { q: "The ___ of the system is crucial. (operate)", a: ["operation", "operator", "operational"], correct: 0, explicacao: "operation: Correto. Substantivo formado de 'operate'." },
+      { q: "He is a ___ reader. (enthusiasm)", a: ["enthusiastic", "enthuse", "enthusiasm"], correct: 0, explicacao: "enthusiastic: Correto. Adjetivo formado de 'enthusiasm'." }
     ]
   },
   {
     icon: "fa-swatchbook", color: "#e65100", title: "Figurative expressions and stylistic devices", questions: [
-      { q: "He has a ___ of gold.", a: ["heart", "hand", "mind"], correct: 0 },
-      { q: "The repetition in the speech was a ___ device.", a: ["stylistic", "literal", "direct"], correct: 0 }
+      { q: "He has a ___ of gold.", a: ["heart", "hand", "mind"], correct: 0, explicacao: "heart: Correto. 'A heart of gold' = pessoa muito boa." },
+      { q: "The repetition in the speech was a ___ device.", a: ["stylistic", "literal", "direct"], correct: 0, explicacao: "stylistic: Correto. 'Stylistic device' = recurso de estilo." }
     ]
   },
   {
     icon: "fa-hand-sparkles", color: "#f06292", title: "Pragmatic markers", questions: [
-      { q: "It's not easy, ___, to find such a job.", a: ["you know", "however", "even though"], correct: 0 },
-      { q: "She's, ___, really talented.", a: ["I mean", "thus", "although"], correct: 0 }
+      { q: "It's not easy, ___, to find such a job.", a: ["you know", "however", "even though"], correct: 0, explicacao: "you know: Correto. Marcador pragmático para envolvimento do ouvinte." },
+      { q: "She's, ___, really talented.", a: ["I mean", "thus", "although"], correct: 0, explicacao: "I mean: Correto. Marcador para esclarecer/explicar." }
     ]
   },
   {
     icon: "fa-book-open", color: "#5e35b1", title: "Literary structures", questions: [
-      { q: "Was I scared? ___!", a: ["Absolutely", "Who", "Why"], correct: 0 },
-      { q: "He kept saying, 'I will win, I will win.' This is an example of ___.", a: ["repetition for effect", "rhetorical question", "parallelism"], correct: 0 }
+      { q: "Was I scared? ___!", a: ["Absolutely", "Who", "Why"], correct: 0, explicacao: "Absolutely: Correto. Ênfase literária." },
+      { q: "He kept saying, 'I will win, I will win.' This is an example of ___.", a: ["repetition for effect", "rhetorical question", "parallelism"], correct: 0, explicacao: "repetition for effect: Correto. Repetição para efeito literário." }
     ]
   }
 ];
 
-const explicacoesC2 = c2Topics.map(topic => topic.questions.map(() => [
-  "Veja a explicação do tópico para entender melhor!"
-]));
 const medalTypes = [
   { name: "Ouro", icon: "fa-medal", class: "c2-medal-gold", emoji: "🥇" },
   { name: "Prata", icon: "fa-medal", class: "c2-medal-silver", emoji: "🥈" },
@@ -287,12 +278,6 @@ let currentTopic = 0, currentQ = 0;
 let questoesTentativas = [];
 let totalQuestoes = 0;
 
-function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
 function embaralharTudo() {
   shuffle(c2Topics);
   c2Topics.forEach(topic => {
@@ -303,6 +288,12 @@ function embaralharTudo() {
       q.correct = q.a.indexOf(correctAnswer);
     });
   });
+}
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
 }
 function inicializaQuestoes() {
   embaralharTudo();
@@ -385,7 +376,7 @@ function checkC2(val) {
     });
     document.getElementById('c2-feedback').innerHTML =
       `<span style="color:#e53935;"><i class="fa-solid fa-circle-xmark"></i> Errou!</span>
-       <div class="c2-explanation">${getExplicacaoC2(currentTopic, currentQ)}</div>`;
+       <div class="c2-explanation">${q.explicacao}</div>`;
   }
 }
 function showGabarito(medalObj, t, q, qidx) {
@@ -405,7 +396,8 @@ function showGabarito(medalObj, t, q, qidx) {
     else
       medalTxt = `🥉 <b>Bronze conquistada!</b>`;
   }
-  fb.innerHTML = `<span style="color:#43a047;"><i class="fa-solid fa-circle-check"></i> Correto!</span> ${medalTxt}`;
+  fb.innerHTML = `<span style="color:#43a047;"><i class="fa-solid fa-circle-check"></i> Correto!</span> ${medalTxt}
+    <div class="c2-explanation">${q.explicacao}</div>`;
   document.getElementById('c2-next-btn').style.display = "inline-block";
 }
 function nextC2() {
@@ -473,21 +465,11 @@ function renderMedalsStatus(showAll = false) {
   html += `</div>`;
   document.getElementById('c2-medals').innerHTML = html;
 }
-function getExplicacaoC2(topicIdx, qIdx) {
-  if (explicacoesC2[topicIdx] && explicacoesC2[topicIdx][qIdx]) {
-    const arr = explicacoesC2[topicIdx][qIdx];
-    if (arr) {
-      return arr[0] || "Confira a explicação do tópico.";
-    }
-  }
-  return "Confira a explicação do tópico.";
-}
 function medalIconHtml(idx) {
   if (idx === 0) return `<span class="c2-medal c2-medal-gold"><i class="fa-solid fa-medal"></i></span>`;
   if (idx === 1) return `<span class="c2-medal c2-medal-silver"><i class="fa-solid fa-medal"></i></span>`;
   return `<span class="c2-medal c2-medal-bronze"><i class="fa-solid fa-medal"></i></span>`;
 }
-// Inicialização profissional e segura
 inicializaQuestoes();
 renderC2Exercise();
 </script>
